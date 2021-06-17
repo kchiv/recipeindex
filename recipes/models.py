@@ -47,4 +47,4 @@ class Recipe(models.Model):
     recipe_protein = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_protein_size')
     recipe_difficulty = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_difficulty_size')
     recipe_time = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_time_size')
-    recipe_time_amount = models.DecimalField(max_digits=4, decimal_places=2, blank=True)
+    recipe_time_amount = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
