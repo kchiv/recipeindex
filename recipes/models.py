@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from ingredients.models import Ingredient
 
 # Create your models here.
@@ -28,7 +29,7 @@ class Recipe(models.Model):
     recipe_name_title_tag = models.CharField(max_length=500, unique=False, blank=True)
     recipe_name_h1 = models.CharField(max_length=400, unique=False, blank=True)
     recipe_rating = models.DecimalField(max_digits=3, decimal_places=1, blank=True)
-    recipe_domain = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True)
+    recipe_publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True)
     recipe_alterations = models.CharField(max_length=400, unique=False, blank=True) # need to make this rich text edtor field
     recipe_notes = models.CharField(max_length=400, unique=False, blank=True) # need to make this rich text edtor field
     recipe_instantpot = models.BooleanField(default=False)
@@ -38,3 +39,4 @@ class Recipe(models.Model):
     recipe_dish = models.ManyToManyField(Dish, blank=True)
     recipe_category = models.ManyToManyField(Category, blank=True)
     recipe_ingredients = models.ManyToManyField(Ingredient, blank=True)
+    recipe_created_date = models.DateTimeField(default=timezone.now)
