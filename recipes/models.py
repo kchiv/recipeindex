@@ -28,7 +28,7 @@ class Recipe(models.Model):
     recipe_name_title_tag = models.CharField(max_length=500, unique=False, blank=True)
     recipe_name_h1 = models.CharField(max_length=400, unique=False, blank=True)
     recipe_rating = models.DecimalField(max_digits=3, decimal_places=1, blank=True)
-    recipe_domain = models.ForeignKey(PublisherDomain, blank=True)
+    recipe_domain = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True)
     recipe_alterations = models.CharField(max_length=400, unique=False, blank=True) # need to make this rich text edtor field
     recipe_notes = models.CharField(max_length=400, unique=False, blank=True) # need to make this rich text edtor field
     recipe_instantpot = models.BooleanField(default=False)
