@@ -23,6 +23,9 @@ class Dish(models.Model):
 class Category(models.Model):
     category_name = models.CharField(max_length=400, unique=True, blank=False)
 
+class Size(models.Model):
+    size_name = models.CharField(max_length=400, unique=True, blank=False)
+
 class Recipe(models.Model):
     recipe_url = models.URLField(max_length=600, unique=True, blank=True)
     recipe_name_custom = models.CharField(max_length=500, unique=False, blank=False)
@@ -40,3 +43,5 @@ class Recipe(models.Model):
     recipe_category = models.ManyToManyField(Category, blank=True)
     recipe_ingredients = models.ManyToManyField(Ingredient, blank=True)
     recipe_created_date = models.DateTimeField(default=timezone.now)
+    recipe_calories = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_calories_size')
+    recipe_protein = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_protein_size')
