@@ -6,7 +6,8 @@ from ingredients.models import Ingredient
 class Author(models.Model):
     author_name = models.CharField(max_length=400, unique=True, blank=False)
 
-class PublisherDomain(models.Model):
+class Publisher(models.Model):
+    publisher_name = models.CharField(max_length=400, unique=True, blank=False)
     domain_name = models.CharField(max_length=400, unique=True, blank=False)
 
 class Cuisine(models.Model):
