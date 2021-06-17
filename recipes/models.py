@@ -22,7 +22,7 @@ class Recipe(models.Model):
     recipe_name_custom = models.CharField(max_length=500, unique=False, blank=False)
     recipe_name_title_tag = models.CharField(max_length=500, unique=False, blank=True)
     recipe_name_h1 = models.CharField(max_length=400, unique=False, blank=True)
-    rating = models.models.DecimalField(max_digits=3, decimal_places=1, blank=True)
+    recipe_rating = models.DecimalField(max_digits=3, decimal_places=1, blank=True)
     recipe_domain = models.CharField(max_length=400, unique=False, blank=False) # make foreign key
     recipe_alterations = models.CharField(max_length=400, unique=False, blank=True) # need to make this rich text edtor field
     recipe_notes = models.CharField(max_length=400, unique=False, blank=True) # need to make this rich text edtor field
@@ -32,4 +32,4 @@ class Recipe(models.Model):
     recipe_meal = models.ManyToManyField(Meal, blank=True)
     recipe_dish = models.ManyToManyField(Dish, blank=True)
     recipe_category = models.ManyToManyField(Category, blank=True)
-    recipe_ingredients = 
+    # recipe_ingredients = 
