@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 from ingredients.models import Ingredient
 
 # Create your models here.
@@ -33,8 +34,8 @@ class Recipe(models.Model):
     recipe_name_h1 = models.CharField(max_length=400, unique=False, blank=True)
     recipe_rating = models.DecimalField(max_digits=3, decimal_places=1, blank=True)
     recipe_publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True)
-    recipe_alterations = models.CharField(max_length=400, unique=False, blank=True) # need to make this rich text edtor field
-    recipe_notes = models.CharField(max_length=400, unique=False, blank=True) # need to make this rich text edtor field
+    recipe_alterations = RichTextField('Recipe alterations', blank=True)
+    recipe_notes = RichTextField('Recipe notes', blank=True)
     recipe_instantpot = models.BooleanField(default=False)
     recipe_author = models.ManyToManyField(Author, blank=True)
     recipe_cuisine = models.ManyToManyField(Cuisine, blank=True)
