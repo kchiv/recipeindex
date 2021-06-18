@@ -3,10 +3,10 @@
 {% load static %}
 
 {% block content %}
-<form>
+<form method="GET">
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Recipe URL</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <label for="urlInput" class="form-label">Recipe URL</label>
+      <input type="url" name="url" class="form-control" id="urlInput">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
