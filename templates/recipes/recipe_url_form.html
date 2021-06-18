@@ -3,12 +3,18 @@
 {% load static %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="urlInput" class="form-label">Recipe URL</label>
-      <input type="url" name="url" class="form-control" id="urlInput">
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="urlInput" class="form-label">Recipe URL</label>
+            <input type="url" name="url" class="form-control" id="urlInput">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  </div>
+</div>
 {% endblock %}
