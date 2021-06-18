@@ -8,7 +8,12 @@
         <div class="col">
             <form action="/your-name/" method="post">
                 {% csrf_token %}
-                {{ form }}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
                 <input type="submit" value="Submit">
             </form>
         </div>
