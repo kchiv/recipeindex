@@ -21,8 +21,14 @@ class Meal(models.Model):
 class Dish(models.Model):
     dish_name = models.CharField(max_length=400, unique=True, blank=False)
 
+    class Meta:
+        verbose_name_plural = 'dishes'
+
 class Category(models.Model):
     category_name = models.CharField(max_length=400, unique=True, blank=False)
+
+    class Meta:
+        verbose_name_plural = 'categories'
 
 class Size(models.Model):
     size_name = models.CharField(max_length=400, unique=True, blank=False)
