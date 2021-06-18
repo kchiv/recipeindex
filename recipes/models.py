@@ -32,6 +32,7 @@ class Category(models.Model):
 
 class Size(models.Model):
     size_name = models.CharField(max_length=400, unique=True, blank=False)
+    size_order = models.IntegerField(blank=False, null=True)
 
 class Recipe(models.Model):
     recipe_url = models.URLField(max_length=600, unique=True, blank=True)
