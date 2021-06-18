@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 # Create your views here.
 
-def recipe_submission(request):
+def recipe_url_form(request):
 
     if request.method == 'POST':
         url_request = request.POST['url']
@@ -21,12 +21,12 @@ def recipe_submission(request):
             # print(h1.get_text())
             request.session['h1_scrape'] = h1.get_text()
 
-        return redirect('recipes:recipe_form')
+        return redirect('recipes:recipe_full_form')
 
 
     return render(request, 'recipes/recipe_submission.html')
 
-def recipe_form(request):
+def recipe_full_form(request):
     url = request.session.get('url_scrape')
     title = request.session.get('title_scrape')
     h1 = request.session.get('h1_scrape')
