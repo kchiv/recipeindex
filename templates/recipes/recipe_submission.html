@@ -3,7 +3,8 @@
 {% load static %}
 
 {% block content %}
-<form method="GET">
+<form method="POST">
+    {% csrf_token %}
     <div class="mb-3">
       <label for="urlInput" class="form-label">Recipe URL</label>
       <input type="url" name="url" class="form-control" id="urlInput">
