@@ -1,6 +1,8 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 import requests
 from bs4 import BeautifulSoup
+from .forms import RecipeForm
 
 # Create your views here.
 
@@ -24,12 +26,23 @@ def recipe_url_form(request):
         return redirect('recipes:recipe_full_form')
 
 
-    return render(request, 'recipes/recipe_submission.html')
+    return render(request, 'recipes/recipe_url_form.html')
 
 def recipe_full_form(request):
-    url = request.session.get('url_scrape')
-    title = request.session.get('title_scrape')
-    h1 = request.session.get('h1_scrape')
+    if request.method == 'POST':
+        form = RecipeForm(request.POST)
 
-    print(url, title, h1)
-    return render(request, 'recipes/recipe_submission.html')
+        if form.is_valid():
+            return HttpResponseRedirect('/thanks/')
+    else:
+        url = request.session.get('url_scrape')
+        title = request.session.get('title_scrape')
+        h1 = request.session.get('h1_scrape')
+        data = {
+            'recipe_url': url,
+            'recipe_name_title_tag': title,
+            'recipe_name_h1': h1
+        }
+        form = RecipeForm(initial=data)
+
+    return render(request, 'recipes/recipe_full_form.html', {'form': form})
