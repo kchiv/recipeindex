@@ -2,7 +2,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 import requests
 from bs4 import BeautifulSoup
+from dal import autocomplete
 from .forms import RecipeForm
+from .models import Author
 
 # Create your views here.
 
@@ -46,3 +48,12 @@ def recipe_full_form(request):
         form = RecipeForm(initial=data)
 
     return render(request, 'recipes/recipe_full_form.html', {'form': form})
+
+class AuthorAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Author.objects.all()
+
+        if self.q:
+            qs = qs.filter(author_name__icontains=self.q)
+        
+        return qs
