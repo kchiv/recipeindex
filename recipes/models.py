@@ -9,15 +9,27 @@ from ingredients.models import Ingredient
 class Author(models.Model):
     author_name = models.CharField(max_length=400, unique=True, blank=False)
 
+    def __str__(self):
+        return self.author_name
+
 class Publisher(models.Model):
     publisher_name = models.CharField(max_length=400, unique=True, blank=False)
     domain_name = models.CharField(max_length=400, unique=True, blank=False)
 
+    def __str__(self):
+        return self.publisher_name
+
 class Cuisine(models.Model):
     cuisine_name = models.CharField(max_length=400, unique=True, blank=False)
 
+    def __str__(self):
+        return self.cuisine_name
+
 class Meal(models.Model):
     meal_name = models.CharField(max_length=400, unique=True, blank=False)
+
+    def __str__(self):
+        return self.meal_name
 
 class Dish(models.Model):
     dish_name = models.CharField(max_length=400, unique=True, blank=False)
@@ -25,18 +37,30 @@ class Dish(models.Model):
     class Meta:
         verbose_name_plural = 'dishes'
 
+    def __str__(self):
+        return self.dish_name
+
 class Category(models.Model):
     category_name = models.CharField(max_length=400, unique=True, blank=False)
 
     class Meta:
         verbose_name_plural = 'categories'
+    
+    def __str__(self):
+        return self.category_name
 
 class Size(models.Model):
     size_name = models.CharField(max_length=400, unique=True, blank=False)
     size_order = models.IntegerField(blank=False, null=True)
 
+    def __str__(self):
+        return self.size_name
+
 class Event(models.Model):
     event_name = models.CharField(max_length=400, unique=True, blank=False)
+
+    def __str__(self):
+        return self.event_name
 
 class Recipe(models.Model):
     recipe_url = models.URLField(max_length=600, unique=True, blank=True)
@@ -70,3 +94,6 @@ class Recipe(models.Model):
     recipe_time_amount = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     recipe_priority = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_priority_size')
     recipe_event = models.ForeignKey(Event, blank=True, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.recipe_name_custom
