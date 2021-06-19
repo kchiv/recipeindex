@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 from ingredients.models import Ingredient
@@ -39,7 +40,15 @@ class Recipe(models.Model):
     recipe_name_custom = models.CharField(max_length=500, unique=False, blank=False)
     recipe_name_title_tag = models.CharField(max_length=500, unique=False, blank=True)
     recipe_name_h1 = models.CharField(max_length=400, unique=False, blank=True)
-    recipe_rating = models.DecimalField(max_digits=3, decimal_places=1, blank=True)
+    recipe_rating = models.DecimalField(
+        max_digits=3, 
+        decimal_places=1, 
+        blank=True, 
+        validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)
+        ]
+    )
     recipe_publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True)
     recipe_alterations = RichTextField('Recipe alterations', blank=True)
     recipe_notes = RichTextField('Recipe notes', blank=True)
