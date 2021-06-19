@@ -93,7 +93,7 @@ class Recipe(models.Model):
     recipe_time = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_time_size')
     recipe_time_amount = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     recipe_priority = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_priority_size')
-    recipe_event = models.ForeignKey(Event, blank=True, on_delete=models.SET_NULL, null=True)
+    recipe_event = models.ManyToManyField(Event, blank=True)
 
     def __str__(self):
         return self.recipe_name_custom
