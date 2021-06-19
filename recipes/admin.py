@@ -12,6 +12,17 @@ from .models import (
 
 # Register your models here.
 
+class RecipeAdmin(admin.ModelAdmin):
+    autocomplete_fields = [
+        'recipe_publisher',
+        'recipe_author',
+        'recipe_cuisine',
+        'recipe_meal',
+        'recipe_dish',
+        'recipe_category',
+        'recipe_ingredients'
+    ]
+
 admin.site.register(Author)
 admin.site.register(Publisher)
 admin.site.register(Cuisine)
