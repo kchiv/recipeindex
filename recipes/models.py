@@ -35,6 +35,9 @@ class Size(models.Model):
     size_name = models.CharField(max_length=400, unique=True, blank=False)
     size_order = models.IntegerField(blank=False, null=True)
 
+class Event(models.Model):
+    event_name = models.CharField(max_length=400, unique=True, blank=False)
+
 class Recipe(models.Model):
     recipe_url = models.URLField(max_length=600, unique=True, blank=True)
     recipe_name_custom = models.CharField(max_length=500, unique=False, blank=False)
@@ -65,3 +68,5 @@ class Recipe(models.Model):
     recipe_difficulty = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_difficulty_size')
     recipe_time = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_time_size')
     recipe_time_amount = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    recipe_priority = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_priority_size')
+    recipe_event = models.ForeignKey(Event, blank=True, on_delete=models.SET_NULL, null=True)
