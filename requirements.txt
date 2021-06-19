@@ -8,6 +8,7 @@ Django==3.2.4
 django-autocomplete-light==3.8.2
 django-ckeditor==6.1.0
 django-js-asset==1.2.2
+django-querysetsequence==0.14
 idna==2.10
 isort==5.8.0
 lazy-object-proxy==1.6.0
