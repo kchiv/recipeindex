@@ -14,7 +14,7 @@ class Author(models.Model):
 
 class Publisher(models.Model):
     publisher_name = models.CharField(max_length=400, unique=True, blank=False)
-    domain_name = models.CharField(max_length=400, unique=True, blank=False)
+    domain_name = models.CharField(max_length=400, unique=True, blank=True)
 
     def __str__(self):
         return self.publisher_name
