@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^meal-autocomplete/$', views.MealAutocomplete.as_view(), name='meal-autocomplete'),
     url(r'^dish-autocomplete/$', views.DishAutocomplete.as_view(), name='dish-autocomplete'),
     url(r'^category-autocomplete/$', views.CategoryAutocomplete.as_view(), name='category-autocomplete'),
+    url(r'^event-autocomplete/$', views.EventAutocomplete.as_view(), name='event-autocomplete'),
 ]
