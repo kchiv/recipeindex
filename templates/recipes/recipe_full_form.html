@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <form action="/your-name/" method="post">
+            <form method="post">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="mb-3">
