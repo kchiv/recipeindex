@@ -7,7 +7,13 @@ class IngredientCategory(models.Model):
 
     class Meta:
         verbose_name_plural = 'ingredient categories'
+    
+    def __str__(self):
+        return self.category_name
 
 class Ingredient(models.Model):
     ingredient_name = models.CharField(max_length=400, unique=True, blank=False)
     ingredient_category = models.ManyToManyField(IngredientCategory, blank=True)
+
+    def __str__(self):
+        return self.ingredient_name
