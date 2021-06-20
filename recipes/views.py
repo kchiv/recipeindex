@@ -49,7 +49,10 @@ def recipe_full_form(request):
     else:
         url = request.session.get('url_scrape')
         title = request.session.get('title_scrape')
-        h1 = request.session.get('h1_scrape')
+        if 'youtube.com' in url:
+            h1 = request.session.get('title_scrape')
+        else:
+            h1 = request.session.get('h1_scrape')
         data = {
             'recipe_url': url,
             'recipe_name_title_tag': title,
