@@ -4,7 +4,14 @@ import requests
 from bs4 import BeautifulSoup
 from dal import autocomplete
 from .forms import RecipeForm
-from .models import Author
+from .models import (
+    Author,
+    Publisher,
+    Cuisine,
+    Meal,
+    Dish,
+    Category
+)
 
 # Create your views here.
 
@@ -49,6 +56,10 @@ def recipe_full_form(request):
 
     return render(request, 'recipes/recipe_full_form.html', {'form': form})
 
+####################
+# Autocomplete views
+####################
+
 class AuthorAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Author.objects.all()
@@ -57,3 +68,49 @@ class AuthorAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(author_name__icontains=self.q)
         
         return qs
+
+class PublisherAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Publisher.objects.all()
+
+        if self.q:
+            qs = qs.filter(publisher_name__icontains=self.q)
+        
+        return qs
+
+class CuisineAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Cuisine.objects.all()
+
+        if self.q:
+            qs = qs.filter(cuisine_name__icontains=self.q)
+        
+        return qs
+
+class MealAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Meal.objects.all()
+
+        if self.q:
+            qs = qs.filter(meal_name__icontains=self.q)
+        
+        return qs
+
+class DishAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Dish.objects.all()
+
+        if self.q:
+            qs = qs.filter(dish_name__icontains=self.q)
+        
+        return qs
+
+class CategoryAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Category.objects.all()
+
+        if self.q:
+            qs = qs.filter(category_name__icontains=self.q)
+        
+        return qs
+
