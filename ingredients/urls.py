@@ -7,5 +7,5 @@ app_name = 'ingredients'
 urlpatterns = [
     # path('recipe-submission/', views.recipe_url_form, name='recipe_url_form'),
     # path('form/', views.recipe_full_form, name='recipe_full_form'),
-    url(r'^ingredient-autocomplete/$', views.IngredientAutocomplete.as_view(), name='ingredient-autocomplete'),
+    url(r'^ingredient-autocomplete/$', views.IngredientAutocomplete.as_view(create_field='ingredient_name'), name='ingredient-autocomplete'),
 ]
