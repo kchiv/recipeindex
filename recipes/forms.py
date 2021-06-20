@@ -14,5 +14,11 @@ class RecipeForm(forms.ModelForm):
         model = models.Recipe
         fields = '__all__'
         widgets = {
-            'recipe_author': autocomplete.ModelSelect2Multiple(url='recipes:author-autocomplete')
+            'recipe_author': autocomplete.ModelSelect2Multiple(url='recipes:author-autocomplete'),
+            'recipe_publisher': autocomplete.ModelSelect2(url='recipes:publisher-autocomplete'),
+            'recipe_cuisine': autocomplete.ModelSelect2Multiple(url='recipes:cuisine-autocomplete'),
+            'recipe_meal': autocomplete.ModelSelect2Multiple(url='recipes:meal-autocomplete'),
+            'recipe_dish': autocomplete.ModelSelect2Multiple(url='recipes:dish-autocomplete'),
+            'recipe_category': autocomplete.ModelSelect2Multiple(url='recipes:category-autocomplete'),
+            'recipe_ingredients': autocomplete.ModelSelect2Multiple(url='ingredients:ingredient-autocomplete'),
         }
