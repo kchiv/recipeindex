@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render, redirect
 import requests
 from bs4 import BeautifulSoup
@@ -43,7 +44,8 @@ def recipe_full_form(request):
         form = RecipeForm(request.POST)
 
         if form.is_valid():
-            return HttpResponseRedirect('/thanks/')
+            form.save()
+            return HttpResponseRedirect(reverse('recipes:recipe_url_form'))
     else:
         url = request.session.get('url_scrape')
         title = request.session.get('title_scrape')
