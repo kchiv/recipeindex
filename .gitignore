@@ -46,3 +46,5 @@ venv.bak/
 *.DS_Store
 **/__pycache__
 **/.DS_Store
+
+/.vscode/
