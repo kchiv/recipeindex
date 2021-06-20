@@ -20,5 +20,6 @@ class RecipeForm(forms.ModelForm):
             'recipe_meal': autocomplete.ModelSelect2Multiple(url='recipes:meal-autocomplete'),
             'recipe_dish': autocomplete.ModelSelect2Multiple(url='recipes:dish-autocomplete'),
             'recipe_category': autocomplete.ModelSelect2Multiple(url='recipes:category-autocomplete'),
+            'recipe_event': autocomplete.ModelSelect2Multiple(url='recipes:event-autocomplete'),
             'recipe_ingredients': autocomplete.ModelSelect2Multiple(url='ingredients:ingredient-autocomplete'),
         }
