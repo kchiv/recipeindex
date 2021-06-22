@@ -10,7 +10,8 @@ class RecipeForm(forms.ModelForm):
                 'class': 'form-control'
             })
         self.fields['recipe_instantpot'].widget.attrs = {'class': 'form-check-input'}
-        # self.fields['recipe_alterations'].widget.attrs = {'class': 'form-control form-check-input'}
+        # self.fields['recipe_publisher'].widget.attrs = {'class': 'w-100'}
+        self.fields['recipe_publisher'].widget.attrs = {'class': ''}
 
     class Meta:
         model = models.Recipe
