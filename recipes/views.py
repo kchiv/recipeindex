@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render, redirect
+from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 from dal import autocomplete
@@ -48,7 +49,22 @@ def recipe_full_form(request):
             return HttpResponseRedirect(reverse('recipes:recipe_url_form'))
     else:
         url = request.session.get('url_scrape')
+        # Strip URL to root domain
+        hostname = urlparse(url).netloc.split(".")[1:]
+        hostname = ".".join(hostname)
+        # Lookup publisher object using domain name
+        publisher_lookup = Publisher.objects.filter(domain_name__icontains=hostname).first()
+
         title = request.session.get('title_scrape')
+
+        # Publisher object conditional
+        if publisher_lookup:
+            # If publisher object exists, set variable to pk of object
+            publisher_lookup = publisher_lookup.pk
+        else:
+            # If publisher object does not exist, return None
+            publisher_lookup = None
+
         if 'youtube.com' in url:
             h1 = request.session.get('title_scrape')
         else:
@@ -56,7 +72,8 @@ def recipe_full_form(request):
         data = {
             'recipe_url': url,
             'recipe_name_title_tag': title,
-            'recipe_name_h1': h1
+            'recipe_name_h1': h1,
+            'recipe_publisher': publisher_lookup
         }
         form = RecipeForm(initial=data)
 
