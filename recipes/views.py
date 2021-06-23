@@ -50,11 +50,9 @@ def recipe_full_form(request):
     else:
         url = request.session.get('url_scrape')
         # Strip URL to root domain
-        hostname = urlparse(url).netloc.split(".")[1:]
-        hostname = ".".join(hostname)
+        hostname = urlparse(url).hostname
         # Lookup publisher object using domain name
         publisher_lookup = Publisher.objects.filter(domain_name__icontains=hostname).first()
-
         title = request.session.get('title_scrape')
 
         # Publisher object conditional
