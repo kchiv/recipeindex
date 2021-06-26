@@ -71,6 +71,7 @@ class Recipe(models.Model):
         max_digits=3, 
         decimal_places=1, 
         blank=True, 
+        null=True,
         validators=[
             MaxValueValidator(10),
             MinValueValidator(0)
