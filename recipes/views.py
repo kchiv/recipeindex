@@ -1,6 +1,7 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render, redirect
+# from django.core.exceptions import DoesNotExist
 from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
@@ -13,7 +14,8 @@ from .models import (
     Meal,
     Dish,
     Category,
-    Event
+    Event,
+    Recipe
 )
 
 # Create your views here.
@@ -22,6 +24,13 @@ def recipe_url_form(request):
 
     if request.method == 'POST':
         url_request = request.POST['url']
+
+        try:
+            url_lookup = Recipe.objects.get(recipe_url__exact=url_request)
+            return render(request, 'recipes/recipe_url_form.html', {'error_message': 'URL already exists.'})
+        except Recipe.DoesNotExist:
+            pass
+
         request.session['url_scrape'] = url_request
         reqs = requests.get(url_request)
 
