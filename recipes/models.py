@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
+from datetime import datetime
 from ckeditor.fields import RichTextField
 from ingredients.models import Ingredient
 
@@ -87,7 +88,7 @@ class Recipe(models.Model):
     recipe_dish = models.ManyToManyField(Dish, blank=True)
     recipe_category = models.ManyToManyField(Category, blank=True)
     recipe_ingredients = models.ManyToManyField(Ingredient, blank=True)
-    recipe_created_date = models.DateTimeField(default=timezone.now)
+    recipe_created_date = models.DateTimeField(default=datetime.now().strftime("%Y-%m-%d"))
     recipe_calories = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_calories_size')
     recipe_protein = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_protein_size')
     recipe_difficulty = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_difficulty_size')
