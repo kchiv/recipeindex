@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # from django.core.exceptions import DoesNotExist
 from urllib.parse import urlparse
 import requests
@@ -85,6 +85,10 @@ def recipe_full_form(request):
         form = RecipeForm(initial=data)
 
     return render(request, 'recipes/recipe_full_form.html', {'form': form})
+
+def recipe_detail(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
 
 ####################
 # Autocomplete views
