@@ -2,6 +2,20 @@
 
 {% load static %}
 
+{% block script %}
+<script>
+    var today = new Date(new Date().setDate(new Date().getDate()));
+    $(document).ready(function() {
+        $(function() {
+            $( "#my_date_picker" ).datepicker({
+                dateFormat: 'yy-mm-dd',
+                defaultDate: today
+            });
+        });
+    })
+</script>
+{% endblock %}
+
 {% block content %}
 {{ form.media }}
 <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
@@ -31,7 +45,7 @@
                         <br>
                         {{ field }}
                     </div>
-        
+
                     {% else %}
                         <div class="mb-3 col-lg-6">
                             <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
