@@ -27,7 +27,6 @@
 
     /* recipe url iframe */
     .tiptext {
-        color:#069; 
         cursor:pointer;
     }
 
@@ -49,7 +48,7 @@
               <a class="nav-link" href="#item-info">Info</a>
               <nav class="nav nav-pills flex-column">
                 {% if recipe.recipe_url %}
-                <a class="nav-link ms-3 my-1" href="#item-url">URL</a>
+                <a class="nav-link ms-3 my-1" href="#item-publisher">Publisher</a>
                 {% endif %}
                 <a class="nav-link ms-3 my-1" href="#item-name">Name</a>
                 <a class="nav-link ms-3 my-1" href="#item-rating">Rating</a>
@@ -67,10 +66,29 @@
           
           <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0" class="scrollspy-body">
             <h4 id="item-info">{{ recipe.recipe_name_custom|title }} Info</h4>
-            {% if recipe.recipe_url %}
-                <h5 id="item-url">Recipe URL</h5>
-                <p><a class="tiptext" target="_blank" href="{{ recipe.recipe_url }}">{{ recipe.recipe_url }} <iframe class="description" src="{{ recipe.recipe_url }}"></iframe><i class="fas fa-external-link-alt"></i></a></p>
-            {% endif %}
+            
+                <h5 id="item-publisher">Recipe Publisher</h5>
+                {% if recipe.recipe_url %}
+                <p><a class="tiptext btn btn-secondary" target="_blank" href="{{ recipe.recipe_url }}">Preview <i class="far fa-eye"></i><iframe class="description" src="{{ recipe.recipe_url }}"></iframe></a></p>
+                {% endif %}
+                <ul>
+                    {% if recipe.recipe_publisher %}
+                    <li><strong>Publisher:</strong> {{ recipe.recipe_publisher.publisher_name }}</li>
+                        {% if recipe.recipe_publisher.domain_name %}
+                        <li><strong>Domain:</strong> <a targe="_blank" href="//{{ recipe.recipe_publisher.domain_name }}/">{{ recipe.recipe_publisher.domain_name }} <i class="fas fa-external-link-alt"></i></a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if recipe.recipe_author %}
+                    <li><strong>Author:</strong> 
+                        {% for author in recipe.recipe_author.all %}
+                            {{ author }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </li>
+                    {% endif %}
+                    {% if recipe.recipe_url %}
+                    <li><strong>URL:</strong> <a target="_blank" href="{{ recipe.recipe_url }}">{{ recipe.recipe_url }} <i class="fas fa-external-link-alt"></i></a></li>
+                    {% endif %}
+                </ul>
             <h5 id="item-name">Recipe Name(s)</h5>
             <ul>
                 <li><strong>Name:</strong> {{ recipe.recipe_name_custom|title }}</li>
