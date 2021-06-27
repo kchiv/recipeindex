@@ -79,6 +79,8 @@ class Recipe(models.Model):
         ]
     )
     recipe_publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True)
+    recipe_full_ingredients = RichTextField('Recipe ingredients list', blank=True)
+    recipe_full_steps = RichTextField('Recipe steps', blank=True)
     recipe_alterations = RichTextField('Recipe alterations', blank=True)
     recipe_notes = RichTextField('Recipe notes', blank=True)
     recipe_instantpot = models.BooleanField(default=False)
