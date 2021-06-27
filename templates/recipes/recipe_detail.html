@@ -43,6 +43,7 @@
     <div class="row">
         <div class="col-4">
         <nav id="navbar-example3" class="navbar navbar-light bg-light flex-column align-items-stretch p-3">
+
             <a class="navbar-brand" href="#">Recipe</a>
             <nav class="nav nav-pills flex-column">
               <a class="nav-link" href="#item-info">Info</a>
@@ -53,7 +54,25 @@
                 <a class="nav-link ms-3 my-1" href="#item-name">Name</a>
                 <a class="nav-link ms-3 my-1" href="#item-rating">Rating</a>
               </nav>
-              <a class="nav-link" href="#item-2">Item 2</a>
+
+              {% if recipe.recipe_full_ingredients or recipe.recipe_full_steps or recipe.recipe_alterations or recipe.recipe_notes %}
+              <a class="nav-link" href="#item-directions">Directions</a>
+              <nav class="nav nav-pills flex-column">
+                {% if recipe.recipe_full_ingredients %}
+                <a class="nav-link ms-3 my-1" href="#item-d-ingredients">Ingredients</a>
+                {% endif %}
+                {% if recipe.recipe_full_steps %}
+                <a class="nav-link ms-3 my-1" href="#item-d-instructions">Instructions</a>
+                {% endif %}
+                {% if recipe.recipe_alterations %}
+                <a class="nav-link ms-3 my-1" href="#item-d-alterations">Alterations</a>
+                {% endif %}
+                {% if recipe.recipe_notes %}
+                <a class="nav-link ms-3 my-1" href="#item-d-notes">Notes</a>
+                {% endif %}
+              </nav>
+              {% endif %}
+
               <a class="nav-link" href="#item-3">Item 3</a>
               <nav class="nav nav-pills flex-column">
                 <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
@@ -111,7 +130,42 @@
                 {% else %}
                     <h5><span class="badge bg-secondary">No rating yet.</span></h5>
                 {% endif %}
-            <h4 id="item-2">Rating</h4>
+            {% if recipe.recipe_full_ingredients or recipe.recipe_full_steps or recipe.recipe_alterations or recipe.recipe_notes %}
+            <h4 id="item-directions">Directions</h4>
+            {% endif %}
+            {% if recipe.recipe_full_ingredients %}
+            <h5 id="item-d-ingredients">Ingredients</h5>
+                <div class="row">
+                    <div class="col">
+                        {{ recipe.recipe_full_ingredients|safe }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if recipe.recipe_full_steps %}
+            <h5 id="item-d-instructions">Instructions</h5>
+                <div class="row">
+                    <div class="col">
+                        {{ recipe.recipe_full_steps|safe }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if recipe.recipe_alterations %}
+            <h5 id="item-d-alterations">Alterations</h5>
+                <div class="row">
+                    <div class="col">
+                        {{ recipe.recipe_alterations|safe }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if recipe.recipe_notes %}
+            <h5 id="item-d-notes">Notes</h5>
+                <div class="row">
+                    <div class="col">
+                        {{ recipe.recipe_notes|safe }}
+                    </div>
+                </div>
+            {% endif %}
+
             <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
             <h4 id="item-3">Item 3</h4>
