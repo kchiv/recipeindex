@@ -58,6 +58,12 @@
               {% if recipe.recipe_full_ingredients or recipe.recipe_full_steps or recipe.recipe_alterations or recipe.recipe_notes %}
               <a class="nav-link" href="#item-directions">Directions</a>
               <nav class="nav nav-pills flex-column">
+                {% if recipe.recipe_difficulty %}
+                <a class="nav-link ms-3 my-1" href="#item-d-difficulty">Difficulty</a>
+                {% endif %}
+                {% if recipe.recipe_time %}
+                <a class="nav-link ms-3 my-1" href="#item-d-time">Time</a>
+                {% endif %}
                 {% if recipe.recipe_full_ingredients %}
                 <a class="nav-link ms-3 my-1" href="#item-d-ingredients">Ingredients</a>
                 {% endif %}
@@ -132,6 +138,21 @@
                 {% endif %}
             {% if recipe.recipe_full_ingredients or recipe.recipe_full_steps or recipe.recipe_alterations or recipe.recipe_notes %}
             <h4 id="item-directions">Directions</h4>
+            {% endif %}
+            {% if recipe.recipe_difficulty %}
+            <h5 id="item-d-difficulty">Difficulty</h5>
+                {% if recipe.recipe_difficulty.size_order == 1 %}
+                    Easy
+                {% elif recipe.recipe_difficulty.size_order == 2 %}
+                    Average
+                {% elif recipe.recipe_difficulty.size_order == 3 %}
+                    Hard
+                {% elif recipe.recipe_difficulty.size_order == 4 %}
+                    Very Hard
+                {% endif %}
+            {% endif %}
+            {% if recipe.recipe_time %}
+            <h5 id="item-d-time">Time</h5>
             {% endif %}
             {% if recipe.recipe_full_ingredients %}
             <h5 id="item-d-ingredients">Ingredients</h5>
