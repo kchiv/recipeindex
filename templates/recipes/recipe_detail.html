@@ -2,6 +2,111 @@
 
 {% load static %}
 
+{% block script %}
+<script>
+    var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: '#navbar-example3'
+    })
+
+    // show recipe url iframe
+    $(".tiptext").mouseover(function() {
+        $(this).children(".description").show();
+    }).mouseout(function() {
+        $(this).children(".description").hide();
+    });
+</script>
+{% endblock %}
+
 {% block content %}
-{{recipe.recipe_name_custom}}
+<style>
+    .scrollspy-body {
+        position: relative;
+        height: 400px;
+        overflow: auto;
+    }
+
+    /* recipe url iframe */
+    .tiptext {
+        color:#069; 
+        cursor:pointer;
+    }
+
+    .description {
+        display:none;
+        position:absolute;
+        border:1px solid #000;
+        width:400px;
+        height:400px;
+        background-color: #fff;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+        <nav id="navbar-example3" class="navbar navbar-light bg-light flex-column align-items-stretch p-3">
+            <a class="navbar-brand" href="#">Recipe</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link" href="#item-info">Info</a>
+              <nav class="nav nav-pills flex-column">
+                {% if recipe.recipe_url %}
+                <a class="nav-link ms-3 my-1" href="#item-url">URL</a>
+                {% endif %}
+                <a class="nav-link ms-3 my-1" href="#item-name">Name</a>
+                <a class="nav-link ms-3 my-1" href="#item-rating">Rating</a>
+              </nav>
+              <a class="nav-link" href="#item-2">Item 2</a>
+              <a class="nav-link" href="#item-3">Item 3</a>
+              <nav class="nav nav-pills flex-column">
+                <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
+                <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
+              </nav>
+            </nav>
+          </nav>
+        </div>
+        <div class="col-8">
+          
+          <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0" class="scrollspy-body">
+            <h4 id="item-info">{{ recipe.recipe_name_custom|title }} Info</h4>
+            {% if recipe.recipe_url %}
+                <h5 id="item-url">Recipe URL</h5>
+                <p><a class="tiptext" target="_blank" href="{{ recipe.recipe_url }}">{{ recipe.recipe_url }} <iframe class="description" src="{{ recipe.recipe_url }}"></iframe><i class="fas fa-external-link-alt"></i></a></p>
+            {% endif %}
+            <h5 id="item-name">Recipe Name(s)</h5>
+            <ul>
+                <li><strong>Name:</strong> {{ recipe.recipe_name_custom|title }}</li>
+                {% if recipe.recipe_name_title_tag %}
+                <li><strong>Title Tag:</strong> {{ recipe.recipe_name_title_tag }}</li>
+                {% endif %}
+                {% if recipe.recipe_name_h1 %}
+                <li><strong>H1:</strong> {{ recipe.recipe_name_h1 }}</li>
+                {% endif %}
+            </ul>
+            <h5 id="item-rating">Rating</h5>
+                {% if recipe.recipe_rating %}
+                    {% if recipe.recipe_rating <= 5 %}
+                        <h5><span class="badge bg-danger">{{ recipe.recipe_rating }}</span></h5>
+                    {% elif recipe.recipe_rating < 8 %}
+                        <h5><span class="badge bg-warning text-dark">{{ recipe.recipe_rating }}</span></h5>
+                    {% else %}
+                        <h5><span class="badge bg-success">{{ recipe.recipe_rating }}</span></h5>
+                    {% endif %}
+                {% else %}
+                    <h5><span class="badge bg-secondary">No rating yet.</span></h5>
+                {% endif %}
+            <h4 id="item-2">Rating</h4>
+            <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
+            <h4 id="item-3">Item 3</h4>
+            <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
+            <h5 id="item-3-1">Item 3-1</h5>
+            <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
+            <h5 id="item-3-2">Item 3-2</h5>
+            <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
+          </div>
+        </div>
+</div>
+</div>
 {% endblock %}
