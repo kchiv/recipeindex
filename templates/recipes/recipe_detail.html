@@ -65,7 +65,7 @@
                 {% if recipe.recipe_difficulty %}
                 <a class="nav-link ms-3 my-1" href="#item-d-difficulty">Difficulty</a>
                 {% endif %}
-                {% if recipe.recipe_time %}
+                {% if recipe.recipe_time or recipe.recipe_time_amount %}
                 <a class="nav-link ms-3 my-1" href="#item-d-time">Time</a>
                 {% endif %}
                 {% if recipe.recipe_full_ingredients %}
@@ -162,8 +162,22 @@
                     <h5><span class="badge bg-purple">Very Hard</span></h5>
                 {% endif %}
             {% endif %}
-            {% if recipe.recipe_time %}
+            <!-- Time -->
+            {% if recipe.recipe_time or recipe.recipe_time_amount %}
             <h5 id="item-d-time">Time</h5>
+                {% if recipe.recipe_time %}
+                    {% if recipe.recipe_time.size_order == 1 %}
+                        <h5><span class="badge bg-success">Quick</span> {% if recipe.recipe_time_amount %}<span class="fs-6">- {{recipe.recipe_time_amount}} hours</span>{% endif %}</h5>
+                    {% elif recipe.recipe_time.size_order == 2 %}
+                        <h5><span class="badge bg-warning text-dark">Medium</span> {% if recipe.recipe_time_amount %}<span class="fs-6">- {{recipe.recipe_time_amount}} hours</span>{% endif %}</h5>
+                    {% elif recipe.recipe_time.size_order == 3 %}
+                        <h5><span class="badge bg-danger">Long</span> {% if recipe.recipe_time_amount %}<span class="fs-6">- {{recipe.recipe_time_amount}} hours</span>{% endif %}</h5>
+                    {% elif recipe.recipe_time.size_order == 4 %}
+                        <h5><span class="badge bg-purple">Very Long</span> {% if recipe.recipe_time_amount %}<span class="fs-6">- {{recipe.recipe_time_amount}} hours</span>{% endif %}</h5>
+                    {% endif %}
+                {% elif recipe.recipe_time_amount %}
+                    <p>{{ recipe.recipe_time_amount }} hours</p>
+                {% endif %}
             {% endif %}
             {% if recipe.recipe_full_ingredients %}
             <h5 id="item-d-ingredients">Ingredients</h5>
