@@ -25,6 +25,10 @@
         overflow: auto;
     }
 
+    .bg-purple {
+        background-color: purple;
+    }
+
     /* recipe url iframe */
     .tiptext {
         cursor:pointer;
@@ -90,7 +94,9 @@
         <div class="col-8">
           
           <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0" class="scrollspy-body">
+            <hr>
             <h4 id="item-info">{{ recipe.recipe_name_custom|title }} Info</h4>
+            <hr>
             
                 <h5 id="item-publisher">Recipe Publisher</h5>
                 {% if recipe.recipe_url %}
@@ -124,6 +130,7 @@
                 <li><strong>H1:</strong> {{ recipe.recipe_name_h1 }}</li>
                 {% endif %}
             </ul>
+            <!-- Rating -->
             <h5 id="item-rating">Rating</h5>
                 {% if recipe.recipe_rating %}
                     {% if recipe.recipe_rating <= 5 %}
@@ -136,19 +143,23 @@
                 {% else %}
                     <h5><span class="badge bg-secondary">No rating yet.</span></h5>
                 {% endif %}
+            <!-- Directions -->
             {% if recipe.recipe_full_ingredients or recipe.recipe_full_steps or recipe.recipe_alterations or recipe.recipe_notes %}
+            <hr>
             <h4 id="item-directions">Directions</h4>
+            <hr>
             {% endif %}
+            <!-- Difficulty -->
             {% if recipe.recipe_difficulty %}
             <h5 id="item-d-difficulty">Difficulty</h5>
                 {% if recipe.recipe_difficulty.size_order == 1 %}
-                    Easy
+                    <h5><span class="badge bg-success">Easy</span></h5>
                 {% elif recipe.recipe_difficulty.size_order == 2 %}
-                    Average
+                    <h5><span class="badge bg-warning text-dark">Average</span></h5>
                 {% elif recipe.recipe_difficulty.size_order == 3 %}
-                    Hard
+                    <h5><span class="badge bg-danger">Hard</span></h5>
                 {% elif recipe.recipe_difficulty.size_order == 4 %}
-                    Very Hard
+                    <h5><span class="badge bg-purple">Very Hard</span></h5>
                 {% endif %}
             {% endif %}
             {% if recipe.recipe_time %}
