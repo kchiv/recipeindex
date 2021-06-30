@@ -97,7 +97,7 @@
             <hr>
             <h4 id="item-info">{{ recipe.recipe_name_custom|title }} Info</h4>
             <hr>
-            
+                <p>Date Created: {{ recipe.recipe_created_date|date:'M d, Y' }}</p>
                 <h5 id="item-publisher">Recipe Publisher</h5>
                 {% if recipe.recipe_url %}
                 <p><a class="tiptext btn btn-secondary" target="_blank" href="{{ recipe.recipe_url }}">Preview <i class="far fa-eye"></i><iframe class="description" src="{{ recipe.recipe_url }}"></iframe></a></p>
