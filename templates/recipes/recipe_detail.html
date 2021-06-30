@@ -52,7 +52,7 @@
             <nav class="nav nav-pills flex-column">
               <a class="nav-link" href="#item-info">Info</a>
               <nav class="nav nav-pills flex-column">
-                {% if recipe.recipe_url %}
+                {% if recipe.recipe_url or recipe.recipe_publisher or recipe.recipe_author  %}
                 <a class="nav-link ms-3 my-1" href="#item-publisher">Publisher</a>
                 {% endif %}
                 <a class="nav-link ms-3 my-1" href="#item-name">Name</a>
