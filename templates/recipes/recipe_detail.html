@@ -132,18 +132,19 @@
                 {% endif %}
             </ul>
             <!-- Rating -->
-            <h5 id="item-rating">Rating</h5>
+            <h5 id="item-rating">Rating
                 {% if recipe.recipe_rating %}
                     {% if recipe.recipe_rating <= 5 %}
-                        <h5><span class="badge bg-danger">{{ recipe.recipe_rating }}</span></h5>
+                        <span class="badge bg-danger">{{ recipe.recipe_rating }}</span>
                     {% elif recipe.recipe_rating < 8 %}
-                        <h5><span class="badge bg-warning text-dark">{{ recipe.recipe_rating }}</span></h5>
+                        <span class="badge bg-warning text-dark">{{ recipe.recipe_rating }}</span>
                     {% else %}
-                        <h5><span class="badge bg-success">{{ recipe.recipe_rating }}</span></h5>
+                        <span class="badge bg-success">{{ recipe.recipe_rating }}</span>
                     {% endif %}
                 {% else %}
-                    <h5><span class="badge bg-secondary">No rating yet.</span></h5>
+                    <span class="badge bg-secondary">No rating yet.</span>
                 {% endif %}
+            </h5>
             <h5 id="item-instantpot">Instantpot {% if recipe.recipe_instantpot %}<span style="color: green;"><i class="fas fa-check-circle"></i></span>{% else %}<span style="color: red;"><i class="fas fa-times-circle"></i></span>{% endif %}</h5>
             <!-- Directions -->
             {% if recipe.recipe_full_ingredients or recipe.recipe_full_steps or recipe.recipe_alterations or recipe.recipe_notes %}
