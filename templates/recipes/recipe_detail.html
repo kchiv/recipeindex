@@ -21,7 +21,7 @@
 <style>
     .scrollspy-body {
         position: relative;
-        height: 400px;
+        height: 900px;
         overflow: auto;
     }
 
@@ -86,8 +86,17 @@
 
               <a class="nav-link" href="#item-attributes">Attributes</a>
               <nav class="nav nav-pills flex-column">
-                <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
-                <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
+                <a class="nav-link ms-3 my-1" href="#item-cuisine">Cuisine</a>
+                <a class="nav-link ms-3 my-1" href="#item-meal">Meal</a>
+                <a class="nav-link ms-3 my-1" href="#item-dish">Dish</a>
+                <a class="nav-link ms-3 my-1" href="#item-category">Category</a>
+                <a class="nav-link ms-3 my-1" href="#item-ingredients-tags">Ingredients (Tags)</a>
+              </nav>
+
+              <a class="nav-link" href="#item-nutrition">Nutrition</a>
+              <nav class="nav nav-pills flex-column">
+                <a class="nav-link ms-3 my-1" href="#item-protein">Protein</a>
+                <a class="nav-link ms-3 my-1" href="#item-calories">Calories</a>
               </nav>
             </nav>
           </nav>
@@ -215,6 +224,14 @@
                 </div>
             {% endif %}
             <h4 id="item-attributes">Attributes</h4>
+            <h5 id="item-cuisine">Cuisine</h5>
+            {% if recipe.recipe_cuisine.all %}
+                {% for cuisine in recipe.recipe_cuisine.all %}
+                <a href="#" class="btn btn-outline-primary">{{ cuisine.cuisine_name }}</a>
+                {% endfor %}
+            {% else %}
+                <p class="fst-italic">No cuisines available.</p>
+            {% endif %}
 
 
             <p>
