@@ -26,7 +26,7 @@
             <form method="post" class="row">
                 {% csrf_token %}
                 {% for field in form %}
-                    {% if field.auto_id == 'id_recipe_alterations' or  field.auto_id == 'id_recipe_notes' %}
+                    {% if field.auto_id == 'id_recipe_alterations' or  field.auto_id == 'id_recipe_notes' or field.auto_id == 'id_recipe_full_ingredients' or field.auto_id == 'id_recipe_full_steps' %}
                         <div class="col-12">
                             <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
                         </div>
