@@ -223,28 +223,98 @@
                     </div>
                 </div>
             {% endif %}
+            <!-- Attributes -->
+            <hr>
             <h4 id="item-attributes">Attributes</h4>
+            <hr>
             <h5 id="item-cuisine">Cuisine</h5>
             {% if recipe.recipe_cuisine.all %}
-                {% for cuisine in recipe.recipe_cuisine.all %}
-                <a href="#" class="btn btn-outline-primary">{{ cuisine.cuisine_name }}</a>
-                {% endfor %}
+                <div class="my-4">
+                    {% for cuisine in recipe.recipe_cuisine.all %}
+                    <a href="#" class="btn btn-outline-primary">{{ cuisine.cuisine_name }}</a>
+                    {% endfor %}
+                </div>
             {% else %}
                 <p class="fst-italic">No cuisines available.</p>
             {% endif %}
 
+            <h5 id="item-meal">Meal</h5>
+            {% if recipe.recipe_meal.all %}
+                <div class="my-4">
+                    {% for meal in recipe.recipe_meal.all %}
+                    <a href="#" class="btn btn-outline-primary">{{ meal.meal_name }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="fst-italic">No meals available.</p>
+            {% endif %}
 
-            <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
-            <h4 id="item-3">Item 3</h4>
-            <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
-            <h5 id="item-3-1">Item 3-1</h5>
-            <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
-            <h5 id="item-3-2">Item 3-2</h5>
-            <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
+            <h5 id="item-dish">Dish</h5>
+            {% if recipe.recipe_dish.all %}
+                <div class="my-4">
+                    {% for dish in recipe.recipe_dish.all %}
+                    <a href="#" class="btn btn-outline-primary">{{ dish.dish_name }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="fst-italic">No dishes available.</p>
+            {% endif %}
+
+            <h5 id="item-category">Category</h5>
+            {% if recipe.recipe_category.all %}
+                <div class="my-4">
+                    {% for category in recipe.recipe_category.all %}
+                    <a href="#" class="btn btn-outline-primary">{{ category.category_name }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="fst-italic">No categories available.</p>
+            {% endif %}
+
+            <h5 id="item-ingredients-tags">Ingredients (Tags)</h5>
+            {% if recipe.recipe_ingredients.all %}
+                <div class="my-4">
+                    {% for ingredients in recipe.recipe_ingredients.all %}
+                    <a href="#" class="btn btn-outline-primary">{{ ingredients.ingredient_name }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="fst-italic">No ingredients available.</p>
+            {% endif %}
+
+            <hr>
+            <h4 id="item-nutrition">Nutrition</h4>
+            <hr>
+            <h5 id="item-protein">Protein</h5>
+                {% if recipe.recipe_protein %}
+                    {% if recipe.recipe_protein.size_order == 4 %}
+                        <h5><span class="badge bg-success">Very High</span></h5>
+                    {% elif recipe.recipe_protein.size_order == 3 %}
+                        <h5><span class="badge bg-success">High</span></h5>
+                    {% elif recipe.recipe_protein.size_order == 2 %}
+                        <h5><span class="badge bg-warning text-dark">Medium</span></h5>
+                    {% elif recipe.recipe_protein.size_order == 1 %}
+                        <h5><span class="badge bg-danger">Low</span></h5>
+                    {% endif %}
+                {% else %}
+                    <p class="fst-italic">No protein info available.</p>
+                {% endif %}
+            <h5 id="item-calories">Calories</h5>
+                {% if recipe.recipe_calories %}
+                    {% if recipe.recipe_calories.size_order == 1 %}
+                        <h5><span class="badge bg-success">Low</span></h5>
+                    {% elif recipe.recipe_calories.size_order == 2 %}
+                        <h5><span class="badge bg-warning text-dark">Medium</span></h5>
+                    {% elif recipe.recipe_calories.size_order == 3 %}
+                        <h5><span class="badge bg-danger">High</span></h5>
+                    {% elif recipe.recipe_calories.size_order == 4 %}
+                        <h5><span class="badge bg-purple">Very High</span></h5>
+                    {% endif %}
+                {% else %}
+                    <p class="fst-italic">No calorie info available.</p>
+                {% endif %}
+
+
           </div>
         </div>
 </div>
