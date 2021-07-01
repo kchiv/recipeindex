@@ -57,6 +57,7 @@
                 {% endif %}
                 <a class="nav-link ms-3 my-1" href="#item-name">Name</a>
                 <a class="nav-link ms-3 my-1" href="#item-rating">Rating</a>
+                <a class="nav-link ms-3 my-1" href="#item-instantpot">Instantpot</a>
               </nav>
 
               {% if recipe.recipe_full_ingredients or recipe.recipe_full_steps or recipe.recipe_alterations or recipe.recipe_notes %}
@@ -83,7 +84,7 @@
               </nav>
               {% endif %}
 
-              <a class="nav-link" href="#item-3">Item 3</a>
+              <a class="nav-link" href="#item-attributes">Attributes</a>
               <nav class="nav nav-pills flex-column">
                 <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
                 <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
@@ -143,6 +144,7 @@
                 {% else %}
                     <h5><span class="badge bg-secondary">No rating yet.</span></h5>
                 {% endif %}
+            <h5 id="item-instantpot">Instantpot {% if recipe.recipe_instantpot %}<span style="color: green;"><i class="fas fa-check-circle"></i></span>{% else %}<span style="color: red;"><i class="fas fa-times-circle"></i></span>{% endif %}</h5>
             <!-- Directions -->
             {% if recipe.recipe_full_ingredients or recipe.recipe_full_steps or recipe.recipe_alterations or recipe.recipe_notes %}
             <hr>
@@ -211,6 +213,8 @@
                     </div>
                 </div>
             {% endif %}
+            <h4 id="item-attributes">Attributes</h4>
+
 
             <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae lorem lorem. Morbi porttitor, nunc vitae accumsan consequat, lorem velit dictum ante, et aliquet tortor ligula at libero. Aenean sit amet interdum libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor est sed nibh lacinia cursus. </p>
