@@ -54,8 +54,8 @@ def recipe_full_form(request):
         form = RecipeForm(request.POST)
 
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('recipes:recipe_url_form'))
+            obj = form.save()
+            return HttpResponseRedirect(reverse('recipes:recipe_detail', kwargs={'recipe_id': obj.id}))
     else:
         url = request.session.get('url_scrape')
         # Strip URL to root domain
