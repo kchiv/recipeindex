@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% load render_table from django_tables2 %}
 
 {% block content %}
 <div class="container">
     <div class="row">
-        {% render_table object_list %}
+        <div class="col-6">
+            <a href="{% url 'recipes:recipe_url_form' %}">Enter Recipe URL</a>
+        </div>
+        <div class="col-6">
+            <a href="{% url 'recipes:recipe_full_form' %}">Create Recipe</a>
+        </div>
     </div>
 </div>
 {% endblock %}
