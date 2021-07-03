@@ -4,6 +4,15 @@
 {% load render_table from django_tables2 %}
 {% load bootstrap3 %}
 
+{% block script %}
+<script>
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row">
