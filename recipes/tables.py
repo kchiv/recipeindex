@@ -2,12 +2,9 @@ from django_tables2 import tables, columns
 from .models import Recipe
 
 class RecipeTable(tables.Table):
-    # date = columns.base.Column()
-    # date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', short=True)
+    recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT')
 
 
-    def render_date(self, record):
-        return record.recipe_created_date
 
     class Meta:
         model = Recipe
