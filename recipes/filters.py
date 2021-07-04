@@ -9,14 +9,14 @@ class RecipeFilter(django_filters.FilterSet):
     recipe_created_date__gt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__gt')
     recipe_created_date__lt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__lt')
 
-    ingredient_object = Ingredient.objects.all()
-    ingredient_list = []
-    for ingredient in ingredient_object:
-        ingredient_list.append((ingredient.pk, ingredient.ingredient_name))
-    print(ingredient_list)
-    ingredient_tuple = tuple(ingredient_list)
-    print(ingredient_tuple)
-    recipe_ingredients = django_filters.ChoiceFilter(choices=ingredient_tuple)
+    # ingredient_object = Ingredient.objects.all()
+    # ingredient_list = []
+    # for ingredient in ingredient_object:
+    #     ingredient_list.append((ingredient.pk, ingredient.ingredient_name))
+    # print(ingredient_list)
+    # ingredient_tuple = tuple(ingredient_list)
+    # print(ingredient_tuple)
+    # recipe_ingredients = django_filters.TypedChoiceFilter(choices=ingredient_tuple)
 
     # recipe_ingredients = django_filters.filters.ModelMultipleChoiceFilter(field_name='recipe_ingredients__ingredient_name', to_field_name='ingredient_name', queryset=Ingredient.objects.all())
 
