@@ -18,8 +18,8 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     <div class="row">
         {% if filter %}
             <form action="" method="get" class="form form-inline">
-                {% bootstrap_form filter.form layout='inline' %}
-                {% bootstrap_button 'filter' %}
+                {{ filter.form.as_p }}
+                <input type="submit" />
             </form>
         {% endif %}
         {% render_table table %}
