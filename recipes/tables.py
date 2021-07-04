@@ -8,7 +8,8 @@ from .models import Recipe
 
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
-    recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT')
+    recipe_publisher = columns.base.Column(verbose_name='Publisher')
+    recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', verbose_name='Created Date')
 
     def render_recipe_name_custom(self, value, record):
         return format_html('''
@@ -16,10 +17,14 @@ class RecipeTable(tables.Table):
             {}
         </a>
         ''', record.get_absolute_url(), record.recipe_name_title_tag, record.recipe_name_h1, value)
+    
+    def render_recipe_publisher(self, value, record):
+        print(value.__dict__)
+        return format_html('<a href="?recipe_publisher={}">{}</a>', value.id, value)
 
 
 
     class Meta:
         model = Recipe
         template_name = 'django_tables2/bootstrap.html'
-        fields = ('recipe_name_custom', 'recipe_rating', 'recipe_created_date', 'recipe_ingredients')
+        fields = ('recipe_name_custom', 'recipe_publisher', 'recipe_rating', 'recipe_created_date', 'recipe_ingredients')
