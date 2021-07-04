@@ -12,7 +12,7 @@ class RecipeTable(tables.Table):
 
     def render_recipe_name_custom(self, value, record):
         return format_html('''
-        <a href="{}" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="<p>{}</p><p>{}</p>">
+        <a href="{}" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="<span><strong>Title:</strong> <em>{}</em></span><br><span><strong>H1:</strong> <em>{}</em></span>">
             {}
         </a>
         ''', record.get_absolute_url(), record.recipe_name_title_tag, record.recipe_name_h1, value)
