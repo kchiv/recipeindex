@@ -9,6 +9,7 @@ from .models import Recipe
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
     recipe_publisher = columns.base.Column(verbose_name='Publisher')
+    recipe_full_ingredients = columns.base.Column(verbose_name='Full Ingredients')
     recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', verbose_name='Created Date')
 
     def render_recipe_name_custom(self, value, record):
@@ -21,7 +22,10 @@ class RecipeTable(tables.Table):
     def render_recipe_publisher(self, value, record):
         print(value.__dict__)
         return format_html('<a href="?recipe_publisher={}">{}</a>', value.id, value)
-
+    
+    def render_recipe_full_ingredients(self, value, record):
+        if value:
+            return format_html('<a href="{}#item-d-ingredients"><span style="color: green;"><i class="fas fa-check-circle"></i></span></a>', record.get_absolute_url())
 
 
     class Meta:
@@ -30,7 +34,8 @@ class RecipeTable(tables.Table):
         fields = (
             'recipe_name_custom', 
             'recipe_publisher', 
-            'recipe_rating', 
+            'recipe_rating',
+            'recipe_full_ingredients',
             'recipe_created_date', 
             'recipe_ingredients'
             )
