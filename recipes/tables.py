@@ -27,4 +27,10 @@ class RecipeTable(tables.Table):
     class Meta:
         model = Recipe
         template_name = 'django_tables2/bootstrap.html'
-        fields = ('recipe_name_custom', 'recipe_publisher', 'recipe_rating', 'recipe_created_date', 'recipe_ingredients')
+        fields = (
+            'recipe_name_custom', 
+            'recipe_publisher', 
+            'recipe_rating', 
+            'recipe_created_date', 
+            'recipe_ingredients'
+            )
