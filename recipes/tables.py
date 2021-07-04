@@ -21,7 +21,6 @@ class RecipeTable(tables.Table):
         ''', record.get_absolute_url(), record.recipe_name_title_tag, record.recipe_name_h1, value)
     
     def render_recipe_publisher(self, value, record):
-        print(value.__dict__)
         return format_html('<a href="?recipe_publisher={}">{}</a>', value.id, value)
 
     def render_recipe_rating(self, value, record):
