@@ -35,21 +35,21 @@ def object_list_sizing(value, field_name):
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
     recipe_url = columns.base.Column(verbose_name='URL')
-    recipe_publisher = columns.base.Column(verbose_name='Publisher')
-    recipe_author = columns.base.Column(verbose_name='Author')
-    recipe_type = columns.base.Column(verbose_name='Type', accessor='recipe_publisher')
+    recipe_publisher = columns.base.Column(verbose_name='Publisher', orderable=False)
+    recipe_author = columns.base.Column(verbose_name='Author', orderable=False)
+    recipe_type = columns.base.Column(verbose_name='Type', accessor='recipe_publisher', orderable=False)
     recipe_rating = columns.base.Column(verbose_name='Rating')
     recipe_full_ingredients = columns.base.Column(verbose_name='Ingredients')
     recipe_full_steps = columns.base.Column(verbose_name='Steps')
     recipe_alterations = columns.base.Column(verbose_name='Alterations')
     recipe_notes = columns.base.Column(verbose_name='Notes')
     recipe_instantpot = columns.base.Column(verbose_name='Instantpot')
-    recipe_cuisine = columns.base.Column(verbose_name='Cuisine')
-    recipe_meal = columns.base.Column(verbose_name='Meal')
-    recipe_dish = columns.base.Column(verbose_name='Dish')
-    recipe_category = columns.base.Column(verbose_name='Category')
-    recipe_ingredients = columns.base.Column(verbose_name='Ingredients')
-    recipe_event = columns.base.Column(verbose_name='Event')
+    recipe_cuisine = columns.base.Column(verbose_name='Cuisine', orderable=False)
+    recipe_meal = columns.base.Column(verbose_name='Meal', orderable=False)
+    recipe_dish = columns.base.Column(verbose_name='Dish', orderable=False)
+    recipe_category = columns.base.Column(verbose_name='Category', orderable=False)
+    recipe_ingredients = columns.base.Column(verbose_name='Ingredients', orderable=False)
+    recipe_event = columns.base.Column(verbose_name='Event', orderable=False)
     recipe_calories = columns.base.Column(verbose_name='Calories')
     recipe_protein = columns.base.Column(verbose_name='Protein')
     recipe_difficulty = columns.base.Column(verbose_name='Difficulty')
@@ -91,7 +91,6 @@ class RecipeTable(tables.Table):
         else:
             full_html_str = '—'
         return format_html(full_html_str)
-        # return format_html('<a href="?recipe_type={}">{}</a>', record.recipe_publisher.publisher_type.id, record.recipe_publisher.publisher_type.type_name)
 
     def render_recipe_rating(self, value, record):
         if value <= 5:
@@ -177,6 +176,7 @@ class RecipeTable(tables.Table):
 
     class Meta:
         model = Recipe
+        # orderable = True
         template_name = 'django_tables2/bootstrap.html'
         fields = (
             'recipe_name_custom',
