@@ -6,6 +6,17 @@ from .models import Recipe
 #     def render(self, value):
 #         return format_html('', value)
 
+def object_list_rend(value, field_name):
+        full_html_str = ''
+        if value.all():
+            for obj in value.all():
+                obj_str = '<a href="?{}={}">{}</a>, '.format(field_name, obj.id, obj)
+                full_html_str += obj_str
+            full_html_str = full_html_str[:-2]
+        else:
+            full_html_str = '—'
+        return format_html(full_html_str)
+
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
     recipe_url = columns.base.Column(verbose_name='URL')
@@ -18,6 +29,7 @@ class RecipeTable(tables.Table):
     recipe_notes = columns.base.Column(verbose_name='Notes')
     recipe_instantpot = columns.base.Column(verbose_name='Instantpot')
     recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', verbose_name='Created Date')
+    recipe_cuisine = columns.base.Column(verbose_name='Cuisine')
 
     def render_recipe_name_custom(self, value, record):
         return format_html('''
@@ -35,17 +47,9 @@ class RecipeTable(tables.Table):
     
     def render_recipe_publisher(self, value, record):
         return format_html('<a href="?recipe_publisher={}">{}</a>', value.id, value)
-    
-    def render_recipe_author(self, value, record):
-        full_html_str = ''
-        if value.all():
-            for name in value.all():
-                author_name_str = '<a href="?recipe_author={}">{}</a>, '.format(name.id ,name)
-                full_html_str += author_name_str
-            full_html_str = full_html_str[:-2]
-        else:
-            full_html_str = '—'
-        return format_html(full_html_str)
+
+    def render_recipe_author(self, value):
+        return object_list_rend(value, 'recipe_author')
 
     def render_recipe_rating(self, value, record):
         if value <= 5:
@@ -76,6 +80,9 @@ class RecipeTable(tables.Table):
             return format_html('<a href="{}#item-instantpot"><span style="color: green;"><i class="fas fa-check-circle"></i></span></a>', record.get_absolute_url())
         else:
             return format_html('<a href="{}#item-instantpot"><span style="color: red;"><i class="fas fa-times-circle"></i></span></a>', record.get_absolute_url())
+    
+    def render_recipe_cuisine(self, value):
+        return object_list_rend(value, 'recipe_cuisine')
 
 
     class Meta:
@@ -93,5 +100,6 @@ class RecipeTable(tables.Table):
             'recipe_notes',
             'recipe_instantpot',
             'recipe_created_date', 
+            'recipe_cuisine',
             'recipe_ingredients'
             )
