@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 from django.urls import reverse
@@ -72,7 +73,7 @@ class Event(models.Model):
         return self.event_name
 
 class Recipe(models.Model):
-    recipe_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    recipe_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     recipe_url = models.URLField(max_length=600, unique=True, blank=True)
     recipe_name_custom = models.CharField(max_length=500, unique=False, blank=False)
     recipe_name_title_tag = models.CharField(max_length=500, unique=False, blank=True)
@@ -108,7 +109,7 @@ class Recipe(models.Model):
     recipe_time_amount = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     recipe_priority = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_priority_size')
     recipe_event = models.ManyToManyField(Event, blank=True)
-    recipe_wayback_url = models.URLField(max_length=600, unique=True, blank=True)
+    recipe_wayback_url = models.URLField(max_length=600, blank=True)
 
     def __str__(self):
         return self.recipe_name_custom
