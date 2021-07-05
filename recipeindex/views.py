@@ -7,9 +7,12 @@ from recipes.models import Recipe
 from recipes.tables import RecipeTable
 from recipes.filters import RecipeFilter
 from django_tables2.views import SingleTableMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class HomePageView(SingleTableMixin, FilterView):
+class HomePageView(LoginRequiredMixin, SingleTableMixin, FilterView):
     model = Recipe
     table_class = RecipeTable
     template_name = 'template_view/index.html'
     filterset_class = RecipeFilter
+    login_url = '/admin/'
+    redirect_field_name = 'home'
