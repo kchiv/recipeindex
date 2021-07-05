@@ -13,6 +13,31 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 {% endblock %}
 
 {% block content %}
+<style>
+    .scrollspy-body {
+        position: relative;
+        height: 900px;
+        overflow: auto;
+    }
+
+    .bg-purple {
+        background-color: purple;
+    }
+
+    /* recipe url iframe */
+    .tiptext {
+        cursor:pointer;
+    }
+
+    .description {
+        display:none;
+        position:absolute;
+        border:1px solid #000;
+        width:400px;
+        height:400px;
+        background-color: #fff;
+    }
+</style>
 <div class="container">
     <div class="row">
         {% if filter %}
