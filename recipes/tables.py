@@ -34,6 +34,7 @@ class RecipeTable(tables.Table):
     recipe_dish = columns.base.Column(verbose_name='Dish')
     recipe_category = columns.base.Column(verbose_name='Category')
     recipe_ingredients = columns.base.Column(verbose_name='Ingredients')
+    recipe_calories = columns.base.Column(verbose_name='Calories')
 
     def render_recipe_name_custom(self, value, record):
         return format_html('''
@@ -99,6 +100,21 @@ class RecipeTable(tables.Table):
     
     def render_recipe_ingredients(self, value):
         return object_list_rend(value, 'recipe_ingredients')
+    
+    def render_recipe_calories(self, value):
+        full_html_str = ''
+        if value:
+            if value.size_order == 1:
+                full_html_str = '<a href="?recipe_calories={}"><span class="badge bg-success">Low</span></a>'.format(value.id)
+            elif value.size_order == 2:
+                full_html_str = '<a href="?recipe_calories={}"><span class="badge bg-warning text-dark">Medium</span></a>'.format(value.id)
+            elif value.size_order == 3:
+                full_html_str = '<a href="?recipe_calories={}"><span class="badge bg-danger">High</span></a>'.format(value.id)
+            elif value.size_order == 4:
+                full_html_str = '<a href="?recipe_calories={}"><span class="badge bg-purple">Very High</span></a>'.format(value.id)
+        else:
+            full_html_str = '—'
+        return format_html(full_html_str)
 
     class Meta:
         model = Recipe
@@ -119,5 +135,6 @@ class RecipeTable(tables.Table):
             'recipe_meal',
             'recipe_dish',
             'recipe_category',
-            'recipe_ingredients'
+            'recipe_ingredients',
+            'recipe_calories'
             )
