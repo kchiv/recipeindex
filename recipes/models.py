@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
@@ -71,6 +72,7 @@ class Event(models.Model):
         return self.event_name
 
 class Recipe(models.Model):
+    recipe_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     recipe_url = models.URLField(max_length=600, unique=True, blank=True)
     recipe_name_custom = models.CharField(max_length=500, unique=False, blank=False)
     recipe_name_title_tag = models.CharField(max_length=500, unique=False, blank=True)
