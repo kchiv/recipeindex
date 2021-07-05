@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
+from django.urls import reverse
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from ingredients.models import Ingredient
@@ -101,3 +102,6 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.recipe_name_custom
+    
+    def get_absolute_url(self):
+        return reverse('recipes:recipe_detail', kwargs={'recipe_id': self.pk})
