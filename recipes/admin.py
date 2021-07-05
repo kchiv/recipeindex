@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import (
     Author,
     Publisher,
+    Type,
     Cuisine,
     Meal,
     Dish,
@@ -25,6 +26,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
 admin.site.register(Author)
 admin.site.register(Publisher)
+admin.site.register(Type)
 admin.site.register(Cuisine)
 admin.site.register(Meal)
 admin.site.register(Dish)
