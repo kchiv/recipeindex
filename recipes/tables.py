@@ -37,20 +37,27 @@ class RecipeTable(tables.Table):
     recipe_url = columns.base.Column(verbose_name='URL')
     recipe_publisher = columns.base.Column(verbose_name='Publisher')
     recipe_author = columns.base.Column(verbose_name='Author')
+    recipe_type = columns.base.Column(verbose_name='Type')
     recipe_rating = columns.base.Column(verbose_name='Rating')
     recipe_full_ingredients = columns.base.Column(verbose_name='Ingredients')
     recipe_full_steps = columns.base.Column(verbose_name='Steps')
     recipe_alterations = columns.base.Column(verbose_name='Alterations')
     recipe_notes = columns.base.Column(verbose_name='Notes')
     recipe_instantpot = columns.base.Column(verbose_name='Instantpot')
-    recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', verbose_name='Created Date')
     recipe_cuisine = columns.base.Column(verbose_name='Cuisine')
     recipe_meal = columns.base.Column(verbose_name='Meal')
     recipe_dish = columns.base.Column(verbose_name='Dish')
     recipe_category = columns.base.Column(verbose_name='Category')
     recipe_ingredients = columns.base.Column(verbose_name='Ingredients')
+    recipe_event = columns.base.Column(verbose_name='Event')
     recipe_calories = columns.base.Column(verbose_name='Calories')
     recipe_protein = columns.base.Column(verbose_name='Protein')
+    recipe_difficulty = columns.base.Column(verbose_name='Difficulty')
+    recipe_time = columns.base.Column(verbose_name='Time')
+    recipe_time_amount = columns.base.Column(verbose_name='Time (Hours)')
+    recipe_priority = columns.base.Column(verbose_name='Priority')
+    recipe_wayback_url = columns.base.Column(verbose_name='Wayback URL')
+    recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', verbose_name='Date')
 
     def render_recipe_name_custom(self, value, record):
         return format_html('''
@@ -71,6 +78,9 @@ class RecipeTable(tables.Table):
 
     def render_recipe_author(self, value):
         return object_list_rend(value, 'recipe_author')
+    
+    def render_recipe_type(self, value, record):
+        return format_html('<a href="?recipe_type={}">{}</a>', value.id, value)
 
     def render_recipe_rating(self, value, record):
         if value <= 5:
@@ -117,6 +127,9 @@ class RecipeTable(tables.Table):
     def render_recipe_ingredients(self, value):
         return object_list_rend(value, 'recipe_ingredients')
     
+    def render_recipe_event(self, value):
+        return object_list_rend(value, 'recipe_event')
+    
     def render_recipe_calories(self, value):
         return object_list_sizing(value, 'recipe_calories')
     
@@ -134,6 +147,22 @@ class RecipeTable(tables.Table):
         else:
             full_html_str = '—'
         return format_html(full_html_str)
+    
+    def render_recipe_difficulty(self, value):
+        return object_list_sizing(value, 'recipe_difficulty')
+    
+    def render_recipe_time(self, value):
+        return object_list_sizing(value, 'recipe_time')
+    
+    def render_recipe_priority(self, value):
+        return object_list_sizing(value, 'recipe_priority')
+    
+    def render_recipe_wayback_url(self, value):
+        return format_html('''
+        <a href="{}" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-html="true" title="<span><em>{}</em></span>">
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+        ''', value, value)
 
     class Meta:
         model = Recipe
@@ -143,18 +172,25 @@ class RecipeTable(tables.Table):
             'recipe_url',
             'recipe_publisher', 
             'recipe_author',
+            'recipe_type',
             'recipe_rating',
             'recipe_full_ingredients',
             'recipe_full_steps',
             'recipe_alterations',
             'recipe_notes',
             'recipe_instantpot',
-            'recipe_created_date', 
             'recipe_cuisine',
             'recipe_meal',
             'recipe_dish',
             'recipe_category',
             'recipe_ingredients',
+            'recipe_event',
             'recipe_calories',
-            'recipe_protein'
+            'recipe_protein',
+            'recipe_difficulty',
+            'recipe_time',
+            'recipe_time_amount',
+            'recipe_priority',
+            'recipe_wayback_url',
+            'recipe_created_date'
             )
