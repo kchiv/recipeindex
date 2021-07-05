@@ -32,5 +32,6 @@ class RecipeFilter(django_filters.FilterSet):
             'recipe_dish',
             'recipe_category',
             'recipe_ingredients',
-            'recipe_calories'
+            'recipe_calories',
+            'recipe_protein'
             ]
