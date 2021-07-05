@@ -24,7 +24,9 @@ class Author(models.Model):
 
 class Publisher(models.Model):
     publisher_name = models.CharField(max_length=400, unique=True, blank=False)
-    domain_name = models.CharField(max_length=400, unique=True, blank=True)
+    publisher_type = models.ForeignKey(Type, blank=True, on_delete=models.SET_NULL, null=True)
+    domain_name = models.CharField(max_length=400, unique=False, blank=True)
+    channel_url = models.URLField(max_length=600, blank=True)
 
     def __str__(self):
         return self.publisher_name
@@ -88,8 +90,7 @@ class Recipe(models.Model):
             MinValueValidator(0)
         ]
     )
-    recipe_publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True)
-    recipe_type = models.ForeignKey(Type, blank=True, on_delete=models.SET_NULL, null=True)
+    recipe_publisher = models.ManyToManyField(Publisher, blank=True)
     recipe_full_ingredients = RichTextField('Recipe ingredients list', blank=True)
     recipe_full_steps = RichTextField('Recipe steps', blank=True)
     recipe_alterations = RichTextField('Recipe alterations', blank=True)
