@@ -8,6 +8,12 @@ from ingredients.models import Ingredient
 
 # Create your models here.
 
+class Type(models.Model):
+    type_name = models.CharField(max_length=400, unique=True, blank=False)
+
+    def __str__(self):
+        return self.type_name
+
 class Author(models.Model):
     author_name = models.CharField(max_length=400, unique=True, blank=False)
 
@@ -80,6 +86,7 @@ class Recipe(models.Model):
         ]
     )
     recipe_publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True)
+    recipe_type = models.ForeignKey(Type, blank=True, on_delete=models.SET_NULL, null=True)
     recipe_full_ingredients = RichTextField('Recipe ingredients list', blank=True)
     recipe_full_steps = RichTextField('Recipe steps', blank=True)
     recipe_alterations = RichTextField('Recipe alterations', blank=True)
@@ -99,6 +106,7 @@ class Recipe(models.Model):
     recipe_time_amount = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     recipe_priority = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_priority_size')
     recipe_event = models.ManyToManyField(Event, blank=True)
+    recipe_wayback_url = models.URLField(max_length=600, unique=True, blank=True)
 
     def __str__(self):
         return self.recipe_name_custom
