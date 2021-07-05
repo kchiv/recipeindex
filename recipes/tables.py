@@ -176,7 +176,6 @@ class RecipeTable(tables.Table):
 
     class Meta:
         model = Recipe
-        # orderable = True
         template_name = 'django_tables2/bootstrap.html'
         fields = (
             'recipe_name_custom',
