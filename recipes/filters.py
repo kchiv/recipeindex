@@ -43,3 +43,10 @@ class RecipeFilter(django_filters.FilterSet):
             'recipe_priority',
             'recipe_created_date'
             ]
+    
+    @property
+    def qs(self):
+        parent = super().qs
+        active_user = getattr(self.request, 'user', None)
+
+        return parent.filter(recipe_user=active_user)
