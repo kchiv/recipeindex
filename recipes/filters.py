@@ -25,6 +25,7 @@ class RecipeFilter(django_filters.FilterSet):
         fields = [
             'recipe_name_custom', 
             'recipe_publisher', 
+            'recipe_author',
             'recipe_created_date', 
             'recipe_ingredients'
             ]
