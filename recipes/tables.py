@@ -8,6 +8,7 @@ from .models import Recipe
 
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
+    recipe_url = columns.base.Column(verbose_name='URL')
     recipe_publisher = columns.base.Column(verbose_name='Publisher')
     recipe_author = columns.base.Column(verbose_name='Author')
     recipe_rating = columns.base.Column(verbose_name='Rating')
@@ -15,6 +16,7 @@ class RecipeTable(tables.Table):
     recipe_full_steps = columns.base.Column(verbose_name='Steps')
     recipe_alterations = columns.base.Column(verbose_name='Alterations')
     recipe_notes = columns.base.Column(verbose_name='Notes')
+    recipe_instantpot = columns.base.Column(verbose_name='Instantpot')
     recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', verbose_name='Created Date')
 
     def render_recipe_name_custom(self, value, record):
@@ -23,6 +25,13 @@ class RecipeTable(tables.Table):
             {}
         </a>
         ''', record.get_absolute_url(), record.recipe_name_title_tag, record.recipe_name_h1, value)
+    
+    def render_recipe_url(self, value):
+        return format_html('''
+        <a href="{}" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-html="true" title="<span><em>{}</em></span>">
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+        ''', value, value)
     
     def render_recipe_publisher(self, value, record):
         return format_html('<a href="?recipe_publisher={}">{}</a>', value.id, value)
@@ -73,7 +82,8 @@ class RecipeTable(tables.Table):
         model = Recipe
         template_name = 'django_tables2/bootstrap.html'
         fields = (
-            'recipe_name_custom', 
+            'recipe_name_custom',
+            'recipe_url',
             'recipe_publisher', 
             'recipe_author',
             'recipe_rating',
