@@ -9,6 +9,7 @@ from .models import Recipe
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
     recipe_publisher = columns.base.Column(verbose_name='Publisher')
+    recipe_author = columns.base.Column(verbose_name='Author')
     recipe_rating = columns.base.Column(verbose_name='Rating')
     recipe_full_ingredients = columns.base.Column(verbose_name='Ingredients')
     recipe_full_steps = columns.base.Column(verbose_name='Steps')
@@ -25,6 +26,17 @@ class RecipeTable(tables.Table):
     
     def render_recipe_publisher(self, value, record):
         return format_html('<a href="?recipe_publisher={}">{}</a>', value.id, value)
+    
+    def render_recipe_author(self, value, record):
+        full_html_str = ''
+        if value.all():
+            for name in value.all():
+                author_name_str = '<a href="?recipe_author={}">{}</a>, '.format(name.id ,name)
+                full_html_str += author_name_str
+            full_html_str = full_html_str[:-2]
+        else:
+            full_html_str = '—'
+        return format_html(full_html_str)
 
     def render_recipe_rating(self, value, record):
         if value <= 5:
@@ -63,6 +75,7 @@ class RecipeTable(tables.Table):
         fields = (
             'recipe_name_custom', 
             'recipe_publisher', 
+            'recipe_author',
             'recipe_rating',
             'recipe_full_ingredients',
             'recipe_full_steps',
