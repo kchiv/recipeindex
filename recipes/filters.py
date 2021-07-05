@@ -28,5 +28,8 @@ class RecipeFilter(django_filters.FilterSet):
             'recipe_author',
             'recipe_created_date', 
             'recipe_cuisine',
+            'recipe_meal',
+            'recipe_dish',
+            'recipe_category',
             'recipe_ingredients'
             ]

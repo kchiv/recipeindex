@@ -30,6 +30,10 @@ class RecipeTable(tables.Table):
     recipe_instantpot = columns.base.Column(verbose_name='Instantpot')
     recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', verbose_name='Created Date')
     recipe_cuisine = columns.base.Column(verbose_name='Cuisine')
+    recipe_meal = columns.base.Column(verbose_name='Meal')
+    recipe_dish = columns.base.Column(verbose_name='Dish')
+    recipe_category = columns.base.Column(verbose_name='Category')
+    recipe_ingredients = columns.base.Column(verbose_name='Ingredients')
 
     def render_recipe_name_custom(self, value, record):
         return format_html('''
@@ -83,7 +87,18 @@ class RecipeTable(tables.Table):
     
     def render_recipe_cuisine(self, value):
         return object_list_rend(value, 'recipe_cuisine')
-
+    
+    def render_recipe_meal(self, value):
+        return object_list_rend(value, 'recipe_meal')
+    
+    def render_recipe_dish(self, value):
+        return object_list_rend(value, 'recipe_dish')
+    
+    def render_recipe_category(self, value):
+        return object_list_rend(value, 'recipe_category')
+    
+    def render_recipe_ingredients(self, value):
+        return object_list_rend(value, 'recipe_ingredients')
 
     class Meta:
         model = Recipe
@@ -101,5 +116,8 @@ class RecipeTable(tables.Table):
             'recipe_instantpot',
             'recipe_created_date', 
             'recipe_cuisine',
+            'recipe_meal',
+            'recipe_dish',
+            'recipe_category',
             'recipe_ingredients'
             )
