@@ -110,6 +110,9 @@ class Recipe(models.Model):
     recipe_priority = models.ForeignKey(Size, blank=True, on_delete=models.SET_NULL, null=True, related_name='recipe_priority_size')
     recipe_event = models.ManyToManyField(Event, blank=True)
     recipe_wayback_url = models.URLField(max_length=600, blank=True)
+    recipe_related_link_1 = models.URLField(max_length=600, blank=True)
+    recipe_related_link_2 = models.URLField(max_length=600, blank=True)
+    recipe_related_link_3 = models.URLField(max_length=600, blank=True)
 
     def __str__(self):
         return self.recipe_name_custom
