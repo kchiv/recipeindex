@@ -1,6 +1,6 @@
 from django.utils.html import format_html
 from django_tables2 import tables, columns
-from .models import Recipe
+from .models import Recipe, Publisher
 
 # class NameColumn(tables.Column):
 #     def render(self, value):
@@ -37,7 +37,7 @@ class RecipeTable(tables.Table):
     recipe_url = columns.base.Column(verbose_name='URL')
     recipe_publisher = columns.base.Column(verbose_name='Publisher')
     recipe_author = columns.base.Column(verbose_name='Author')
-    recipe_type = columns.base.Column(verbose_name='Type')
+    recipe_type = columns.base.Column(verbose_name='Type', accessor='recipe_publisher')
     recipe_rating = columns.base.Column(verbose_name='Rating')
     recipe_full_ingredients = columns.base.Column(verbose_name='Ingredients')
     recipe_full_steps = columns.base.Column(verbose_name='Steps')
@@ -73,14 +73,25 @@ class RecipeTable(tables.Table):
         </a>
         ''', value, value)
     
-    def render_recipe_publisher(self, value, record):
-        return format_html('<a href="?recipe_publisher={}">{}</a>', value.id, value)
+    def render_recipe_publisher(self, value):
+        return object_list_rend(value, 'recipe_publisher')
 
     def render_recipe_author(self, value):
         return object_list_rend(value, 'recipe_author')
     
     def render_recipe_type(self, value, record):
-        return format_html('<a href="?recipe_type={}">{}</a>', value.id, value)
+        full_html_str = ''
+        # for i in value.all():
+        #     print(i.publisher_type)
+        if value.all():
+            for obj in value.all():
+                obj_str = '<a href="?{}={}">{}</a>, '.format('recipe_type', obj.publisher_type.id, obj.publisher_type.type_name)
+                full_html_str += obj_str
+            full_html_str = full_html_str[:-2]
+        else:
+            full_html_str = '—'
+        return format_html(full_html_str)
+        # return format_html('<a href="?recipe_type={}">{}</a>', record.recipe_publisher.publisher_type.id, record.recipe_publisher.publisher_type.type_name)
 
     def render_recipe_rating(self, value, record):
         if value <= 5:
