@@ -17,6 +17,21 @@ def object_list_rend(value, field_name):
             full_html_str = '—'
         return format_html(full_html_str)
 
+def object_list_sizing(value, field_name):
+        full_html_str = ''
+        if value:
+            if value.size_order == 1:
+                full_html_str = '<a href="?{}={}"><span class="badge bg-success">Low</span></a>'.format(field_name, value.id)
+            elif value.size_order == 2:
+                full_html_str = '<a href="?{}={}"><span class="badge bg-warning text-dark">Medium</span></a>'.format(field_name, value.id)
+            elif value.size_order == 3:
+                full_html_str = '<a href="?{}={}"><span class="badge bg-danger">High</span></a>'.format(field_name, value.id)
+            elif value.size_order == 4:
+                full_html_str = '<a href="?{}={}"><span class="badge bg-purple">Very High</span></a>'.format(field_name, value.id)
+        else:
+            full_html_str = '—'
+        return format_html(full_html_str)
+
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
     recipe_url = columns.base.Column(verbose_name='URL')
@@ -103,19 +118,7 @@ class RecipeTable(tables.Table):
         return object_list_rend(value, 'recipe_ingredients')
     
     def render_recipe_calories(self, value):
-        full_html_str = ''
-        if value:
-            if value.size_order == 1:
-                full_html_str = '<a href="?recipe_calories={}"><span class="badge bg-success">Low</span></a>'.format(value.id)
-            elif value.size_order == 2:
-                full_html_str = '<a href="?recipe_calories={}"><span class="badge bg-warning text-dark">Medium</span></a>'.format(value.id)
-            elif value.size_order == 3:
-                full_html_str = '<a href="?recipe_calories={}"><span class="badge bg-danger">High</span></a>'.format(value.id)
-            elif value.size_order == 4:
-                full_html_str = '<a href="?recipe_calories={}"><span class="badge bg-purple">Very High</span></a>'.format(value.id)
-        else:
-            full_html_str = '—'
-        return format_html(full_html_str)
+        return object_list_sizing(value, 'recipe_calories')
     
     def render_recipe_protein(self, value):
         full_html_str = ''
