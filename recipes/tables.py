@@ -48,7 +48,7 @@ class RecipeTable(tables.Table):
     recipe_meal = columns.base.Column(verbose_name='Meal', orderable=False)
     recipe_dish = columns.base.Column(verbose_name='Dish', orderable=False)
     recipe_category = columns.base.Column(verbose_name='Category', orderable=False)
-    recipe_ingredients = columns.base.Column(verbose_name='Ingredients', orderable=False)
+    recipe_ingredients = columns.base.Column(verbose_name='Ingredients', orderable=False, attrs={'th': {'style': 'width: 10%'}})
     recipe_event = columns.base.Column(verbose_name='Event', orderable=False)
     recipe_calories = columns.base.Column(verbose_name='Calories')
     recipe_protein = columns.base.Column(verbose_name='Protein')
@@ -176,7 +176,8 @@ class RecipeTable(tables.Table):
 
     class Meta:
         model = Recipe
-        template_name = 'django_tables2/bootstrap.html'
+        attrs = {"style": "width: 300%;"}
+        template_name = 'django_tables2/bootstrap-responsive.html'
         fields = (
             'recipe_name_custom',
             'recipe_url',
