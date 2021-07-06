@@ -169,7 +169,7 @@ class RecipeTable(tables.Table):
     
     def render_recipe_wayback_url(self, value):
         return format_html('''
-        <a href="{}" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-html="true" title="<span><em>{}</em></span>">
+        <a target="_blank" href="{}" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-html="true" title="<span><em>{}</em></span>">
             <i class="fas fa-external-link-alt"></i>
         </a>
         ''', value, value)
