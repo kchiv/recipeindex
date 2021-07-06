@@ -16,7 +16,7 @@ class RecipeFilter(django_filters.FilterSet):
     recipe_author = django_filters.filters.ModelMultipleChoiceFilter(
         label='Author', 
         queryset=Author.objects.all(), 
-        widget=autocomplete.ModelSelect2Multiple(url='recipes:author-autocomplete'))
+        widget=autocomplete.ModelSelect2Multiple(url='recipes:author-autocomplete-filter'))
     recipe_type = django_filters.filters.ModelMultipleChoiceFilter(
         field_name='recipe_publisher__publisher_type', 
         to_field_name='id', 
