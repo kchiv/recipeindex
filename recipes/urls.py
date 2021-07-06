@@ -16,4 +16,10 @@ urlpatterns = [
     url(r'^category-autocomplete/$', views.CategoryAutocomplete.as_view(create_field='category_name'), name='category-autocomplete'),
     url(r'^event-autocomplete/$', views.EventAutocomplete.as_view(create_field='event_name'), name='event-autocomplete'),
     url(r'^author-autocomplete-filter/$', views.AuthorAutocomplete.as_view(), name='author-autocomplete-filter'),
+    url(r'^publisher-autocomplete-filter/$', views.PublisherAutocomplete.as_view(), name='publisher-autocomplete-filter'),
+    url(r'^cuisine-autocomplete-filter/$', views.CuisineAutocomplete.as_view(), name='cuisine-autocomplete-filter'),
+    url(r'^meal-autocomplete-filter/$', views.MealAutocomplete.as_view(), name='meal-autocomplete-filter'),
+    url(r'^dish-autocomplete-filter/$', views.DishAutocomplete.as_view(), name='dish-autocomplete-filter'),
+    url(r'^category-autocomplete-filter/$', views.CategoryAutocomplete.as_view(), name='category-autocomplete-filter'),
+    url(r'^event-autocomplete-filter/$', views.EventAutocomplete.as_view(), name='event-autocomplete-filter'),
 ]
