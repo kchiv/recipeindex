@@ -176,6 +176,7 @@ class RecipeTable(tables.Table):
 
     class Meta:
         model = Recipe
+        order_by = '-recipe_rating'
         attrs = {"style": "width: 300%;"}
         template_name = 'django_tables2/bootstrap-responsive.html'
         fields = (
