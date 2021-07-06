@@ -8,7 +8,8 @@ from .models import (
     Dish,
     Category,
     Size,
-    Recipe
+    Recipe,
+    Event
 )
 
 # Register your models here.
@@ -24,6 +25,7 @@ class RecipeAdmin(admin.ModelAdmin):
         'recipe_ingredients'
     ]
 
+admin.site.register(Event)
 admin.site.register(Author)
 admin.site.register(Publisher)
 admin.site.register(Type)
