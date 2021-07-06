@@ -40,12 +40,21 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 </style>
 <div class="container">
     <div class="row">
-        {% if filter %}
-            <form action="" method="get" class="form form-inline">
-                {{ filter.form.as_p }}
+        <div class="col">
+            {% if filter %}
+            <form action="" method="GET" class="row">
+                <!-- {{ filter.form.as_p }}
+                <input type="submit" /> -->
+                {% for field in filter.form %}
+                    <div class="mb-3 col-lg-6">
+                        <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
                 <input type="submit" />
             </form>
         {% endif %}
+        </div>
         {% render_table table %}
     </div>
 </div>
