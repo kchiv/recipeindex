@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^dish-autocomplete-filter/$', views.DishAutocomplete.as_view(), name='dish-autocomplete-filter'),
     url(r'^category-autocomplete-filter/$', views.CategoryAutocomplete.as_view(), name='category-autocomplete-filter'),
     url(r'^event-autocomplete-filter/$', views.EventAutocomplete.as_view(), name='event-autocomplete-filter'),
+    url(r'^type-autocomplete-filter/$', views.TypeAutocomplete.as_view(), name='type-autocomplete-filter'),
 ]
