@@ -15,7 +15,8 @@ from .models import (
     Dish,
     Category,
     Event,
-    Recipe
+    Recipe,
+    Type
 )
 
 # Create your views here.
@@ -154,5 +155,14 @@ class EventAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(event_name__icontains=self.q)
+        
+        return qs
+
+class TypeAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Type.objects.all()
+
+        if self.q:
+            qs = qs.filter(type_name__icontains=self.q)
         
         return qs
