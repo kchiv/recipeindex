@@ -3,7 +3,7 @@ from .models import Recipe, Type
 from ingredients.models import Ingredient
 
 class RecipeFilter(django_filters.FilterSet):
-    recipe_name_custom = django_filters.CharFilter(lookup_expr='icontains')
+    recipe_name_custom = django_filters.CharFilter(lookup_expr='icontains', label='Recipe Name')
     recipe_type = django_filters.filters.ModelMultipleChoiceFilter(
         field_name='recipe_publisher__publisher_type', 
         to_field_name='id', 
@@ -43,6 +43,10 @@ class RecipeFilter(django_filters.FilterSet):
             'recipe_priority',
             'recipe_created_date'
             ]
+
+    # def __init__(self, *args, **kwargs):
+    #     super(RecipeFilter, self).__init__(*args, **kwargs)
+    #     self.filters['recipe_name_custom'].extra.update({'empty_label': 'Recipe Name'})
     
     @property
     def qs(self):
