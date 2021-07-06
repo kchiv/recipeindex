@@ -9,6 +9,13 @@ var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggl
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })
+
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
 </script>
 {% endblock %}
 
@@ -41,21 +48,39 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 <div class="container">
     <div class="row">
         <div class="col">
-            {% if filter %}
-            <form action="" method="GET" class="row">
-                <!-- {{ filter.form.as_p }}
-                <input type="submit" /> -->
-                {% for field in filter.form %}
-                    <div class="mb-3 col-lg-6">
-                        <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
-                        {{ field }}
-                    </div>
-                {% endfor %}
-                <input type="submit" />
-            </form>
-        {% endif %}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fas fa-filter"></i> Filter
+            </button>
         </div>
+        <!-- Table -->
         {% render_table table %}
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="GET">
+                <div class="modal-body">
+                {% if filter %}
+                        {% for field in filter.form %}
+                            <div class="mb-3 col-lg-6">
+                                <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" />
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
