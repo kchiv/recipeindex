@@ -1,4 +1,5 @@
 from django import forms
+from dal import autocomplete
 import django_filters
 from .models import (
     Recipe, 
@@ -8,8 +9,14 @@ from .models import (
 from ingredients.models import Ingredient
 
 class RecipeFilter(django_filters.FilterSet):
-    recipe_name_custom = django_filters.CharFilter(lookup_expr='icontains', label='Recipe Name', widget=forms.TextInput(attrs={'class':'form-control'}))
-    recipe_author = django_filters.filters.ModelMultipleChoiceFilter(label='Author', queryset=Author.objects.all(), widget=forms.SelectMultiple(attrs={'class':'form-control'}))
+    recipe_name_custom = django_filters.CharFilter(
+        lookup_expr='icontains', 
+        label='Recipe Name', 
+        widget=forms.TextInput(attrs={'class':'form-control'}))
+    recipe_author = django_filters.filters.ModelMultipleChoiceFilter(
+        label='Author', 
+        queryset=Author.objects.all(), 
+        widget=autocomplete.ModelSelect2Multiple(url='recipes:author-autocomplete'))
     recipe_type = django_filters.filters.ModelMultipleChoiceFilter(
         field_name='recipe_publisher__publisher_type', 
         to_field_name='id', 
