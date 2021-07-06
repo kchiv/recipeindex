@@ -44,7 +44,12 @@ myModal.addEventListener('shown.bs.modal', function () {
         height:400px;
         background-color: #fff;
     }
+
+    .select2-container {
+    z-index: 99999;
+}
 </style>
+{{ filter.form.media }}
 <div class="container mt-5">
     <div class="row">
         <!-- Buttons -->
@@ -84,6 +89,7 @@ myModal.addEventListener('shown.bs.modal', function () {
             </div>
             </div>
         </div>
+        <!-- End Modal -->
     </div>
 </div>
 {% endblock %}
