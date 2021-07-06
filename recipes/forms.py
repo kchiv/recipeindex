@@ -17,6 +17,7 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = models.Recipe
         fields = '__all__'
+        exclude = ['recipe_user']
         widgets = {
             'recipe_author': autocomplete.ModelSelect2Multiple(url='recipes:author-autocomplete'),
             'recipe_publisher': autocomplete.ModelSelect2(url='recipes:publisher-autocomplete'),
