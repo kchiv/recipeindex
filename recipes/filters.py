@@ -165,9 +165,13 @@ class RecipeFilter(django_filters.FilterSet):
             'recipe_full_ingredients',
             ]
 
-    # def __init__(self, *args, **kwargs):
-    #     super(RecipeFilter, self).__init__(*args, **kwargs)
-    #     self.filters['recipe_name_custom'].extra.update({'empty_label': 'Recipe Name'})
+    def __init__(self, *args, **kwargs):
+        super(RecipeFilter, self).__init__(*args, **kwargs)
+        for field in iter(self.form.fields):
+            self.form.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
+        # self.form.fields['recipe_name_custom'].widget.attrs = {'class': 'form-check-input'}
     
     @property
     def qs(self):
