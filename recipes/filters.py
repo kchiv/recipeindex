@@ -42,11 +42,11 @@ class RecipeFilter(django_filters.FilterSet):
         label='Rating',
         field_class=forms.DecimalField,
         lookup_choices=[
-            ('exact', '='),
-            ('gt', '>'),
-            ('gte', '>='),
-            ('lt', '<'),
-            ('lte', '<='),
+            ('exact', 'Equals'),
+            ('gt', 'Greater'),
+            ('gte', 'Greater/Equal'),
+            ('lt', 'Less'),
+            ('lte', 'Less/Equal'),
             ('isnull', '--')
         ]
     )
@@ -92,11 +92,11 @@ class RecipeFilter(django_filters.FilterSet):
         label='Time (Hours)',
         field_class=forms.DecimalField,
         lookup_choices=[
-            ('exact', '='),
-            ('gt', '>'),
-            ('gte', '>='),
-            ('lt', '<'),
-            ('lte', '<='),
+            ('exact', 'Equals'),
+            ('gt', 'Greater'),
+            ('gte', 'Greater/Equal'),
+            ('lt', 'Less'),
+            ('lte', 'Less/Equal'),
             ('isnull', '--')
         ]
     )
@@ -171,7 +171,16 @@ class RecipeFilter(django_filters.FilterSet):
             self.form.fields[field].widget.attrs.update({
                 'class': 'form-control'
             })
-        # self.form.fields['recipe_name_custom'].widget.attrs = {'class': 'form-check-input'}
+        self.form.fields['recipe_calories'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_difficulty'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_priority'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_protein'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_full_ingredients'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_full_steps'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_alterations'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_notes'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_instantpot'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_wayback_url'].widget.attrs = {'class': 'form-select'}
     
     @property
     def qs(self):
