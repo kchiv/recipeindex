@@ -15,6 +15,15 @@ from .models import (
     )
 from ingredients.models import Ingredient
 
+def filter_not_empty(queryset, name, value):
+    print(value)
+    if value == True:
+        lookup = '__'.join([name, 'exact'])
+        return queryset.exclude(**{lookup: ''})
+    else:
+        lookup = '__'.join([name, 'exact'])
+        return queryset.filter(**{lookup: ''})
+
 class RecipeFilter(django_filters.FilterSet):
     recipe_name_custom = django_filters.CharFilter(
         lookup_expr='icontains', 
@@ -81,6 +90,11 @@ class RecipeFilter(django_filters.FilterSet):
         ]
     )
     recipe_created_date = django_filters.DateFromToRangeFilter()
+    recipe_full_ingredients = django_filters.BooleanFilter(label='Full Ingredients Exist', method=filter_not_empty)
+    recipe_full_steps = django_filters.BooleanFilter(label='Full Steps Exist', method=filter_not_empty)
+    recipe_alterations = django_filters.BooleanFilter(label='Alterations Exist', method=filter_not_empty)
+    recipe_notes = django_filters.BooleanFilter(label='Notes Exist', method=filter_not_empty)
+    recipe_instantpot = django_filters.BooleanFilter(label='Instantpot Recipe')
     # recipe_created_date = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year')
     # recipe_created_date__gt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__gt')
     # recipe_created_date__lt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__lt')
@@ -95,7 +109,6 @@ class RecipeFilter(django_filters.FilterSet):
     # recipe_ingredients = django_filters.TypedChoiceFilter(choices=ingredient_tuple)
 
     # recipe_ingredients = django_filters.filters.ModelMultipleChoiceFilter(field_name='recipe_ingredients__ingredient_name', to_field_name='ingredient_name', queryset=Ingredient.objects.all())
-
 
     class Meta:
         model = Recipe
@@ -116,7 +129,8 @@ class RecipeFilter(django_filters.FilterSet):
             'recipe_difficulty',
             'recipe_time_amount',
             'recipe_priority',
-            'recipe_created_date'
+            'recipe_created_date',
+            'recipe_full_ingredients',
             ]
 
     # def __init__(self, *args, **kwargs):
