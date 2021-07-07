@@ -80,7 +80,8 @@ class RecipeFilter(django_filters.FilterSet):
             ('lte', '<='),
         ]
     )
-    recipe_created_date = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year')
+    recipe_created_date = django_filters.DateFromToRangeFilter()
+    # recipe_created_date = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year')
     # recipe_created_date__gt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__gt')
     # recipe_created_date__lt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__lt')
 
