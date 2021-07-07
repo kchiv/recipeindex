@@ -10,8 +10,6 @@ class RecipeForm(forms.ModelForm):
                 'class': 'form-control'
             })
         self.fields['recipe_instantpot'].widget.attrs = {'class': 'form-check-input'}
-        # self.fields['recipe_publisher'].widget.attrs = {'class': 'w-100'}
-        self.fields['recipe_publisher'].widget.attrs = {'class': ''}
         self.fields['recipe_created_date'].widget.attrs = {'id': 'my_date_picker', 'class': 'form-control'}
 
     class Meta:
@@ -20,7 +18,7 @@ class RecipeForm(forms.ModelForm):
         exclude = ['recipe_user']
         widgets = {
             'recipe_author': autocomplete.ModelSelect2Multiple(url='recipes:author-autocomplete'),
-            'recipe_publisher': autocomplete.ModelSelect2(url='recipes:publisher-autocomplete'),
+            'recipe_publisher': autocomplete.ModelSelect2Multiple(url='recipes:publisher-autocomplete'),
             'recipe_cuisine': autocomplete.ModelSelect2Multiple(url='recipes:cuisine-autocomplete'),
             'recipe_meal': autocomplete.ModelSelect2Multiple(url='recipes:meal-autocomplete'),
             'recipe_dish': autocomplete.ModelSelect2Multiple(url='recipes:dish-autocomplete'),
