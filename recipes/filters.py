@@ -16,7 +16,8 @@ from .models import (
 from ingredients.models import Ingredient
 
 def filter_not_empty(queryset, name, value):
-    print(value)
+    # filter used to generate boolean logic for rte fields
+    # to check whether blank or not
     if value == True:
         lookup = '__'.join([name, 'exact'])
         return queryset.exclude(**{lookup: ''})
