@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django import forms
 from dal import autocomplete
 import django_filters
@@ -15,6 +16,13 @@ from .models import (
     )
 from ingredients.models import Ingredient
 
+def name_custom_filter(queryset, name, value):
+        return Recipe.objects.filter(
+            Q(recipe_name_custom__icontains=value) | 
+            Q(recipe_name_title_tag__icontains=value) | 
+            Q(recipe_name_h1__icontains=value)
+        )
+
 def filter_not_empty(queryset, name, value):
     # filter used to generate boolean logic for rte fields
     # to check whether blank or not
@@ -27,7 +35,7 @@ def filter_not_empty(queryset, name, value):
 
 class RecipeFilter(django_filters.FilterSet):
     recipe_name_custom = django_filters.CharFilter(
-        lookup_expr='icontains', 
+        method=name_custom_filter,
         label='Recipe Name', 
         widget=forms.TextInput(attrs={'class':'form-control'}))
     recipe_rating = django_filters.LookupChoiceFilter(
