@@ -98,6 +98,7 @@ class RecipeFilter(django_filters.FilterSet):
     recipe_alterations = django_filters.BooleanFilter(label='Alterations Exist', method=filter_not_empty)
     recipe_notes = django_filters.BooleanFilter(label='Notes Exist', method=filter_not_empty)
     recipe_instantpot = django_filters.BooleanFilter(label='Instantpot Recipe')
+    recipe_wayback_url = django_filters.BooleanFilter(label='Wayback URLs Exist', method=filter_not_empty)
     # recipe_created_date = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year')
     # recipe_created_date__gt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__gt')
     # recipe_created_date__lt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__lt')
