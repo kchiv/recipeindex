@@ -46,8 +46,13 @@ myModal.addEventListener('shown.bs.modal', function () {
     }
 
     .select2-container {
-    z-index: 99999;
-}
+        z-index: 99999;
+    }
+
+    .date-between {
+        display: inline;
+        width: 40%;
+    }
 </style>
 {{ filter.form.media }}
 <div class="container mt-5">
@@ -80,6 +85,12 @@ myModal.addEventListener('shown.bs.modal', function () {
                                             <div class="input-group">
                                                 {{ field }}
                                             </div>
+                                        </div>
+                                    {% elif field.auto_id == 'id_recipe_created_date' or field.auto_id == 'id_recipe_publisher' or field.auto_id == 'id_recipe_type' or field.auto_id == 'id_recipe_author' or field.auto_id == 'id_recipe_cuisine' or field.auto_id == 'id_recipe_meal' or field.auto_id == 'id_recipe_dish' or field.auto_id == 'id_recipe_category' or field.auto_id == 'id_recipe_ingredients' or field.auto_id == 'id_recipe_event' %}
+                                        <div class="mb-3 col-lg-6">
+                                            <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+                                            <br>
+                                            {{ field }}
                                         </div>
                                     {% else %}
                                         <div class="mb-3 col-lg-6">
