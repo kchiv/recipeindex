@@ -38,6 +38,7 @@ class RecipeFilter(django_filters.FilterSet):
             ('gte', '>='),
             ('lt', '<'),
             ('lte', '<='),
+            ('isnull', '--')
         ]
     )
     recipe_author = django_filters.filters.ModelMultipleChoiceFilter(
@@ -87,6 +88,7 @@ class RecipeFilter(django_filters.FilterSet):
             ('gte', '>='),
             ('lt', '<'),
             ('lte', '<='),
+            ('isnull', '--')
         ]
     )
     recipe_created_date = django_filters.DateFromToRangeFilter()
