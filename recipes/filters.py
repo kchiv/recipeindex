@@ -181,6 +181,7 @@ class RecipeFilter(django_filters.FilterSet):
         self.form.fields['recipe_notes'].widget.attrs = {'class': 'form-select'}
         self.form.fields['recipe_instantpot'].widget.attrs = {'class': 'form-select'}
         self.form.fields['recipe_wayback_url'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_created_date'].widget.attrs = {'class': 'form-control date-between'}
     
     @property
     def qs(self):
