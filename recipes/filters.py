@@ -20,6 +20,17 @@ class RecipeFilter(django_filters.FilterSet):
         lookup_expr='icontains', 
         label='Recipe Name', 
         widget=forms.TextInput(attrs={'class':'form-control'}))
+    recipe_rating = django_filters.LookupChoiceFilter(
+        label='Rating',
+        field_class=forms.DecimalField,
+        lookup_choices=[
+            ('exact', '='),
+            ('gt', '>'),
+            ('gte', '>='),
+            ('lt', '<'),
+            ('lte', '<='),
+        ]
+    )
     recipe_author = django_filters.filters.ModelMultipleChoiceFilter(
         label='Author', 
         queryset=Author.objects.all(), 
@@ -58,6 +69,17 @@ class RecipeFilter(django_filters.FilterSet):
         label='Event', 
         queryset=Event.objects.all(), 
         widget=autocomplete.ModelSelect2Multiple(url='recipes:event-autocomplete-filter'))
+    recipe_time_amount = django_filters.LookupChoiceFilter(
+        label='Time (Hours)',
+        field_class=forms.DecimalField,
+        lookup_choices=[
+            ('exact', '='),
+            ('gt', '>'),
+            ('gte', '>='),
+            ('lt', '<'),
+            ('lte', '<='),
+        ]
+    )
     recipe_created_date = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year')
     # recipe_created_date__gt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__gt')
     # recipe_created_date__lt = django_filters.NumberFilter(field_name='recipe_created_date', lookup_expr='year__lt')
@@ -78,6 +100,7 @@ class RecipeFilter(django_filters.FilterSet):
         model = Recipe
         fields = [
             'recipe_name_custom', 
+            'recipe_rating',
             'recipe_publisher', 
             'recipe_type',
             'recipe_author',
