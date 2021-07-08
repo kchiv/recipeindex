@@ -10,6 +10,7 @@ django-ckeditor==6.1.0
 django-filter==2.4.0
 django-js-asset==1.2.2
 django-querysetsequence==0.14
+-e git+https://github.com/jschneier/django-storages.git@35d0b84a488007501ea1d04732f3edf774546055#egg=django_storages
 django-tables2==2.4.0
 idna==2.10
 isort==5.8.0
