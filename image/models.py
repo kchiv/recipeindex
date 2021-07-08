@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 class ImageFile(models.Model):
     image_name = models.CharField(max_length=400, blank=True, help_text='Name of image.')
-    image_file = models.ImageField(upload_to='img')
+    image_file = models.FileField(upload_to='img')
     publication_date = models.DateTimeField(default=timezone.now)
 
     def clean(self, *args, **kwargs):
@@ -23,7 +23,7 @@ class ImageFile(models.Model):
             pass
 
     def __str__(self):
-        return self.image_file
+        return self.image_file.name
 
 # Handles deletion on S3
 @receiver(models.signals.post_delete, sender=ImageFile)
