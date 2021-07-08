@@ -20,11 +20,12 @@
 {{ form.media }}
 <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
-<div class="container mt-5">
+<div class="container my-5">
     <div class="row">
         <div class="col">
             <form method="post" class="row">
                 {% csrf_token %}
+                {{ form.errors }}
                 {% for field in form %}
                     {% if field.auto_id == 'id_recipe_alterations' or  field.auto_id == 'id_recipe_notes' or field.auto_id == 'id_recipe_full_ingredients' or field.auto_id == 'id_recipe_full_steps' %}
                         <div class="col-12">
