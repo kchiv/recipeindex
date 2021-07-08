@@ -115,7 +115,7 @@ class Recipe(models.Model):
     recipe_related_link_1 = models.URLField(max_length=600, blank=True)
     recipe_related_link_2 = models.URLField(max_length=600, blank=True)
     recipe_related_link_3 = models.URLField(max_length=600, blank=True)
-    recipe_file_storage = models.ForeignKey(ImageFile, blank=True, on_delete=models.SET_NULL, null=True)
+    recipe_file_storage = models.ManyToManyField(ImageFile, blank=True)
 
     def __str__(self):
         return self.recipe_name_custom
