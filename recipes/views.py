@@ -1,6 +1,8 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic.edit import CreateView
+from django_addanother.views import CreatePopupMixin
 # from django.core.exceptions import DoesNotExist
 from urllib.parse import urlparse
 import requests
@@ -20,6 +22,10 @@ from .models import (
 )
 
 # Create your views here.
+
+#####################
+# Recipe object views
+#####################
 
 def recipe_url_form(request):
 
@@ -90,6 +96,23 @@ def recipe_full_form(request):
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
+
+
+########################
+# Publisher object views
+########################
+
+class PublisherCreate(CreatePopupMixin, CreateView):
+    model = Publisher
+    form_class = FileForm
+    template_name = 'image/file_form.html'
+
+    def get_success_url(self):
+        return reverse('images:file_detail', kwargs={'file_id': self.object.pk})
+
+def publisher_detail(request, publisher_id):
+    publisher_obj = get_object_or_404(Publisher, pk=publisher_id)
+    return render(request, 'recipes/publisher_detail.html', {'publisher_obj': publisher_obj})
 
 ####################
 # Autocomplete views
