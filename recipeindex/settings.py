@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'django_tables2',
     'django_filters',
+    'django_addanother',
     'storages',
 ]
 
