@@ -1,4 +1,3 @@
-from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView
@@ -20,6 +19,10 @@ class FileCreate(CreatePopupMixin, CreateView):
 def file_detail(request, file_id):
     file_obj = get_object_or_404(ImageFile, pk=file_id)
     return render(request, 'image/file_detail.html', {'file_obj': file_obj})
+
+####################
+# Autocomplete views
+####################
 
 class FileAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
