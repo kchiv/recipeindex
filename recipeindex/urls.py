@@ -22,4 +22,5 @@ urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('recipes/', include('recipes.urls')),
     path('ingredients/', include('ingredients.urls')),
+    path('images/', include('image.urls')),
 ]
