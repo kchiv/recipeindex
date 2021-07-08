@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'recipes.apps.RecipesConfig',
     'ingredients.apps.IngredientsConfig',
+    'image.apps.ImageConfig',
     'dal',
     'dal_select2',
     'dal_queryset_sequence',
