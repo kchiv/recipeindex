@@ -10,6 +10,7 @@ django-ckeditor==6.1.0
 django-filter==2.4.0
 django-js-asset==1.2.2
 django-querysetsequence==0.14
+django-tables2==2.4.0
 idna==2.10
 isort==5.8.0
 lazy-object-proxy==1.6.0
