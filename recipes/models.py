@@ -7,6 +7,7 @@ from django.urls import reverse
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from ingredients.models import Ingredient
+from image.models import ImageFile
 
 # Create your models here.
 
@@ -114,6 +115,7 @@ class Recipe(models.Model):
     recipe_related_link_1 = models.URLField(max_length=600, blank=True)
     recipe_related_link_2 = models.URLField(max_length=600, blank=True)
     recipe_related_link_3 = models.URLField(max_length=600, blank=True)
+    recipe_file_storage = models.ForeignKey(ImageFile, blank=True, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.recipe_name_custom
