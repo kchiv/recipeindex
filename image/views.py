@@ -11,8 +11,8 @@ from .forms import FileForm
 
 class FileCreate(CreatePopupMixin, CreateView):
     model = ImageFile
+    form_class = FileForm
     template_name = 'image/file_form.html'
-    fields = '__all__'
 
     def get_success_url(self):
         return reverse('images:file_detail', kwargs={'file_id': self.object.pk})
