@@ -1,14 +1,15 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic.edit import CreateView
+from django_addanother.views import CreatePopupMixin
 from dal import autocomplete
 from .models import ImageFile
 from .forms import FileForm
-from django.views.generic.edit import CreateView
 
 # Create your views here.
 
-class FileCreate(CreateView):
+class FileCreate(CreatePopupMixin, CreateView):
     model = ImageFile
     template_name = 'image/file_form.html'
     fields = '__all__'
