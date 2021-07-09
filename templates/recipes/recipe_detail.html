@@ -374,6 +374,44 @@
                 {% else %}
                     <p class="fst-italic">No calorie info available.</p>
                 {% endif %}
+            
+            <!-- Other -->
+            <hr>
+            <h4 id="item-other">Other</h4>
+            <hr>
+            <!-- Wayback URL -->
+            <h5 id="item-wayback">Wayback URL</h5>
+            {% if recipe.recipe_wayback_url %}
+                <div class="my-4">
+                    <a target="_blank" href="{{ recipe.recipe_wayback_url }}">{{ recipe.recipe_wayback_url }}</a>
+                </div>
+            {% else %}
+                <p class="fst-italic">No wayback url available.</p>
+            {% endif %}
+
+            <h5 id="item-related-links">Related Links</h5>
+            {% if recipe.recipe_related_link_1 or recipe.recipe_related_link_2 or recipe.recipe_related_link_3 %}
+                <div class="my-4">
+                    <ul>
+                        {% if recipe.recipe_related_link_1 %}<li><a target="_blank" href="{{ recipe.recipe_related_link_1 }}">{{ recipe.recipe_related_link_1 }}</a></li>{% endif %}
+                        {% if recipe.recipe_related_link_2 %}<li><a target="_blank" href="{{ recipe.recipe_related_link_2 }}">{{ recipe.recipe_related_link_2 }}</a></li>{% endif %}
+                        {% if recipe.recipe_related_link_3 %}<li><a target="_blank" href="{{ recipe.recipe_related_link_3 }}">{{ recipe.recipe_related_link_3 }}</a></li>{% endif %}
+                    </ul>
+                </div>
+            {% else %}
+                <p class="fst-italic">No related urls available.</p>
+            {% endif %}
+
+            <h5 id="item-files">Files</h5>
+            {% if recipe.recipe_file_storage %}
+                <div class="my-4">
+                    <ul>
+                        <li>test</li>
+                    </ul>
+                </div>
+            {% else %}
+                <p class="fst-italic">No files available.</p>
+            {% endif %}
 
 
           </div>
