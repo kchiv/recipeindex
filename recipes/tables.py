@@ -181,7 +181,7 @@ class RecipeTable(tables.Table):
     
     def render_recipe_file_storage(self, value, record):
         if value.all():
-            return format_html('<a href="{}#item-d-ingredients"><span style="color: green;"><i class="fas fa-check-circle"></i></span></a>', record.get_absolute_url())
+            return format_html('<a href="{}#item-files"><span style="color: green;"><i class="fas fa-check-circle"></i></span></a>', record.get_absolute_url())
         else:
             return format_html('—')
 
