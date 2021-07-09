@@ -33,6 +33,17 @@ def filter_not_empty(queryset, name, value):
         lookup = '__'.join([name, 'exact'])
         return queryset.filter(**{lookup: ''})
 
+def filter_not_empty_related(queryset, name, value):
+    # filter used to generate boolean logic for rte fields
+    # to check whether blank or not
+    print(name)
+    if value == True:
+        lookup = '__'.join([name, 'isnull'])
+        return queryset.filter(**{lookup: ''})
+    else:
+        lookup = '__'.join([name, 'isnull'])
+        return queryset.exclude(**{lookup: ''})
+
 class RecipeFilter(django_filters.FilterSet):
     recipe_name_custom = django_filters.CharFilter(
         method=name_custom_filter,
@@ -107,6 +118,7 @@ class RecipeFilter(django_filters.FilterSet):
     recipe_notes = django_filters.BooleanFilter(label='Notes Exist', method=filter_not_empty)
     recipe_instantpot = django_filters.BooleanFilter(label='Instantpot Recipe')
     recipe_wayback_url = django_filters.BooleanFilter(label='Wayback URLs Exist', method=filter_not_empty)
+    recipe_file_storage = django_filters.BooleanFilter(label='Files Exist', method=filter_not_empty_related)
     recipe_full_ingredients_search = django_filters.CharFilter(
         field_name='recipe_full_ingredients',
         lookup_expr='icontains',
