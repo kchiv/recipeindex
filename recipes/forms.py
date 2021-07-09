@@ -37,6 +37,7 @@ class PublisherForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
             })
+        self.fields['publisher_type'].widget.attrs = {'class': 'form-select'}
 
     class Meta:
         model = models.Publisher
