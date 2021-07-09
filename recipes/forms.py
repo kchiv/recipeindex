@@ -20,7 +20,7 @@ class RecipeForm(forms.ModelForm):
         exclude = ['recipe_user']
         widgets = {
             'recipe_author': autocomplete.ModelSelect2Multiple(url='recipes:author-autocomplete'),
-            'recipe_publisher': autocomplete.ModelSelect2Multiple(url='recipes:publisher-autocomplete'),
+            'recipe_publisher': AddAnotherWidgetWrapper(autocomplete.ModelSelect2Multiple(url='recipes:publisher-autocomplete'), reverse_lazy('recipes:publisher_full_form'),),
             'recipe_cuisine': autocomplete.ModelSelect2Multiple(url='recipes:cuisine-autocomplete'),
             'recipe_meal': autocomplete.ModelSelect2Multiple(url='recipes:meal-autocomplete'),
             'recipe_dish': autocomplete.ModelSelect2Multiple(url='recipes:dish-autocomplete'),
@@ -29,3 +29,15 @@ class RecipeForm(forms.ModelForm):
             'recipe_ingredients': autocomplete.ModelSelect2Multiple(url='ingredients:ingredient-autocomplete'),
             'recipe_file_storage': AddAnotherWidgetWrapper(autocomplete.ModelSelect2Multiple(url='images:file-autocomplete'), reverse_lazy('images:file_form'),),
         }
+
+class PublisherForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PublisherForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
+
+    class Meta:
+        model = models.Publisher
+        fields = '__all__'
