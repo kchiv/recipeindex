@@ -123,7 +123,17 @@
                 <ul>
                     <!-- Publisher -->
                     {% if recipe.recipe_publisher %}
-                    <li><strong>Publisher:</strong> {{ recipe.recipe_publisher.publisher_name }}</li>
+                    <li><strong>Publisher:</strong> 
+                        {% for publisher in recipe.recipe_publisher.all %}
+                            {% if publisher.channel_url %}
+                                <a target="_blank" href="{{ publisher.channel_url }}">{{ publisher }}</a>{% if not forloop.last %}, {% endif %}
+                            {% elif publisher.domain_name %}
+                                <a targe="_blank" href="//{{ publisher.domain_name }}/">{{ publisher }}</a>{% if not forloop.last %}, {% endif %}
+                            {% else %}
+                                {{ publisher }}{% if not forloop.last %}, {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </li>
                         <!-- Domain -->
                         {% if recipe.recipe_publisher.domain_name %}
                         <li><strong>Domain:</strong> <a targe="_blank" href="//{{ recipe.recipe_publisher.domain_name }}/">{{ recipe.recipe_publisher.domain_name }} <i class="fas fa-external-link-alt"></i></a></li>
