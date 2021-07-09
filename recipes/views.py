@@ -8,7 +8,10 @@ from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 from dal import autocomplete
-from .forms import RecipeForm
+from .forms import (
+    RecipeForm,
+    PublisherForm
+)
 from .models import (
     Author,
     Publisher,
@@ -104,7 +107,7 @@ def recipe_detail(request, recipe_id):
 
 class PublisherCreate(CreatePopupMixin, CreateView):
     model = Publisher
-    form_class = FileForm
+    form_class = PublisherForm
     template_name = 'image/file_form.html'
 
     def get_success_url(self):
