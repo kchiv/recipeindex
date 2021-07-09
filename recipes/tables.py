@@ -57,6 +57,7 @@ class RecipeTable(tables.Table):
     recipe_time_amount = columns.base.Column(verbose_name='Time (Hours)')
     recipe_priority = columns.base.Column(verbose_name='Priority')
     recipe_wayback_url = columns.base.Column(verbose_name='Wayback URL')
+    recipe_file_storage = columns.base.Column(verbose_name='Files')
     recipe_created_date = columns.datetimecolumn.DateTimeColumn(format='SHORT_DATE_FORMAT', verbose_name='Date')
 
     def render_recipe_name_custom(self, value, record):
@@ -177,6 +178,12 @@ class RecipeTable(tables.Table):
             <i class="fas fa-external-link-alt"></i>
         </a>
         ''', value, value)
+    
+    def render_recipe_file_storage(self, value, record):
+        if value.all():
+            return format_html('<a href="{}#item-d-ingredients"><span style="color: green;"><i class="fas fa-check-circle"></i></span></a>', record.get_absolute_url())
+        else:
+            return format_html('—')
 
     class Meta:
         model = Recipe
@@ -208,5 +215,6 @@ class RecipeTable(tables.Table):
             'recipe_time_amount',
             'recipe_priority',
             'recipe_wayback_url',
+            'recipe_file_storage',
             'recipe_created_date'
             )
