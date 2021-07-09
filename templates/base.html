@@ -17,7 +17,9 @@
   <body>
     
     <!-- Nav -->
-    {% include 'partials/_navbar.html' %}
+    {% if not view.is_popup %}
+      {% include 'partials/_navbar.html' %}
+    {% endif %}
     <!-- Body -->
     {% block content %}
     {% endblock %}
