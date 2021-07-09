@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <form method="post" class="row" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.errors }}
+                {% for field in form %}
+                    {% if field.auto_id == 'id_domain_name' %}
+                        <div class="mb-3 col-lg-6">
+                            <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            <div class="form-text">Enter full domain including subdomain. Example: "www.jocooks.com". If no subdomain (non-www) is available, include only root domain. Example: "damndelicious.net"</div>
+                        </div>
+                    {% else %}
+                        <div class="mb-3 col-lg-6">
+                            <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
