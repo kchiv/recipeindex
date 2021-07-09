@@ -95,6 +95,7 @@
                 <a class="nav-link ms-3 my-1" href="#item-dish">Dish</a>
                 <a class="nav-link ms-3 my-1" href="#item-category">Category</a>
                 <a class="nav-link ms-3 my-1" href="#item-ingredients-tags">Ingredients (Tags)</a>
+                <a class="nav-link ms-3 my-1" href="#item-event">Event</a>
               </nav>
 
               <a class="nav-link" href="#item-nutrition">Nutrition</a>
@@ -265,7 +266,7 @@
             {% if recipe.recipe_cuisine.all %}
                 <div class="my-4">
                     {% for cuisine in recipe.recipe_cuisine.all %}
-                    <a href="#" class="btn btn-outline-primary">{{ cuisine.cuisine_name }}</a>
+                    <a href="{% url 'home' %}?recipe_cuisine={{ cuisine.id }}" class="btn btn-outline-primary">{{ cuisine.cuisine_name }}</a>
                     {% endfor %}
                 </div>
             {% else %}
@@ -277,7 +278,7 @@
             {% if recipe.recipe_meal.all %}
                 <div class="my-4">
                     {% for meal in recipe.recipe_meal.all %}
-                    <a href="#" class="btn btn-outline-primary">{{ meal.meal_name }}</a>
+                    <a href="{% url 'home' %}?recipe_meal={{ meal.id }}" class="btn btn-outline-primary">{{ meal.meal_name }}</a>
                     {% endfor %}
                 </div>
             {% else %}
@@ -289,7 +290,7 @@
             {% if recipe.recipe_dish.all %}
                 <div class="my-4">
                     {% for dish in recipe.recipe_dish.all %}
-                    <a href="#" class="btn btn-outline-primary">{{ dish.dish_name }}</a>
+                    <a href="{% url 'home' %}?recipe_dish={{ dish.id }}" class="btn btn-outline-primary">{{ dish.dish_name }}</a>
                     {% endfor %}
                 </div>
             {% else %}
@@ -301,7 +302,7 @@
             {% if recipe.recipe_category.all %}
                 <div class="my-4">
                     {% for category in recipe.recipe_category.all %}
-                    <a href="#" class="btn btn-outline-primary">{{ category.category_name }}</a>
+                    <a href="{% url 'home' %}?recipe_category={{ category.id }}" class="btn btn-outline-primary">{{ category.category_name }}</a>
                     {% endfor %}
                 </div>
             {% else %}
@@ -313,11 +314,23 @@
             {% if recipe.recipe_ingredients.all %}
                 <div class="my-4">
                     {% for ingredients in recipe.recipe_ingredients.all %}
-                    <a href="#" class="btn btn-outline-primary">{{ ingredients.ingredient_name }}</a>
+                    <a href="{% url 'home' %}?recipe_ingredients={{ ingredients.id }}" class="btn btn-outline-primary">{{ ingredients.ingredient_name }}</a>
                     {% endfor %}
                 </div>
             {% else %}
                 <p class="fst-italic">No ingredients available.</p>
+            {% endif %}
+
+            <!-- Event -->
+            <h5 id="item-event">Events</h5>
+            {% if recipe.recipe_event.all %}
+                <div class="my-4">
+                    {% for event in recipe.recipe_event.all %}
+                    <a href="{% url 'home' %}?recipe_event={{ event.id }}" class="btn btn-outline-primary">{{ event.event_name }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="fst-italic">No events available.</p>
             {% endif %}
 
             <!-- Nutrition -->
