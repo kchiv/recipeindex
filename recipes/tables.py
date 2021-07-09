@@ -83,9 +83,13 @@ class RecipeTable(tables.Table):
         full_html_str = ''
         # for i in value.all():
         #     print(i.publisher_type)
+        # print(value.all())
         if value.all():
             for obj in value.all():
-                obj_str = '<a href="?{}={}">{}</a>, '.format('recipe_type', obj.publisher_type.id, obj.publisher_type.type_name)
+                if obj.publisher_type:
+                    obj_str = '<a href="?{}={}">{}</a>, '.format('recipe_type', obj.publisher_type.id, obj.publisher_type.type_name)
+                else:
+                    obj_str = 'N/A, '
                 full_html_str += obj_str
             full_html_str = full_html_str[:-2]
         else:
