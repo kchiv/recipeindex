@@ -111,7 +111,7 @@ class PublisherCreate(CreatePopupMixin, CreateView):
     template_name = 'image/file_form.html'
 
     def get_success_url(self):
-        return reverse('images:file_detail', kwargs={'file_id': self.object.pk})
+        return reverse('images:file_detail', kwargs={'publisher_id': self.object.pk})
 
 def publisher_detail(request, publisher_id):
     publisher_obj = get_object_or_404(Publisher, pk=publisher_id)
