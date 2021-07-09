@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 class ImageFile(models.Model):
     image_name = models.CharField(max_length=400, blank=True, help_text='Name of image.')
-    image_file = models.FileField(upload_to='img')
+    image_file = models.FileField(upload_to='img', max_length=900)
     publication_date = models.DateTimeField(default=timezone.now)
 
     def clean(self, *args, **kwargs):
