@@ -96,6 +96,19 @@ def recipe_full_form(request):
 
     return render(request, 'recipes/recipe_full_form.html', {'form': form})
 
+def recipe_full_form_edit(request, recipe_id):
+    instance = Recipe.objects.get(pk=recipe_id)
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, instance=instance)
+
+        if form.is_valid():
+            obj = form.save()
+            return HttpResponseRedirect(reverse('recipes:recipe_detail', kwargs={'recipe_id': obj.id}))
+    else:
+        form = RecipeForm(instance=instance)
+
+    return render(request, 'recipes/recipe_full_form.html', {'form': form, 'edit': True, 'instance': instance})
+
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
