@@ -55,6 +55,13 @@
                 {% endfor %}
                 <input class="btn btn-primary" type="submit" value="Submit">
             </form>
+            {% if edit %}
+            <form method="post" action="{% url 'recipes:recipe_delete' instance.id  %}">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" value="Delete">
+                
+            </form>
+            {% endif %}
         </div>
     </div>
 </div>
