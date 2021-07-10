@@ -109,6 +109,16 @@ def recipe_full_form_edit(request, recipe_id):
 
     return render(request, 'recipes/recipe_full_form.html', {'form': form, 'edit': True, 'instance': instance})
 
+def recipe_delete(request, recipe_id):
+    instance = Recipe.objects.get(pk=recipe_id)
+    if request.method == 'POST':
+        instance.delete()
+        return HttpResponseRedirect(reverse('home'))
+    else:
+        form = RecipeForm(instance=instance)
+
+    return render(request, 'recipes/recipe_full_form.html', {'form': form, 'edit': True, 'instance': instance})
+
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
