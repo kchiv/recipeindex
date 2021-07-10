@@ -406,7 +406,16 @@
             {% if recipe.recipe_file_storage %}
                 <div class="my-4">
                     <ul>
-                        <li>test</li>
+                        {% for fs in recipe.recipe_file_storage.all %}
+                            {% if fs.image_name %}
+                                <li><a href="{% url 'images:file_detail' fs.id %}">{{ fs.image_name }}</a></li>
+                            {% else %}
+                                <li><a href="{% url 'images:file_detail' fs.id %}">{{ fs.image_file }}</a></li>
+                            {% endif %}
+                                <ul>
+                                    <li><a class="small" target="_blank" href="{{ fs.image_file.url }}">Direct Link <i class="fas fa-external-link-alt"></i></a></li>
+                                </ul>
+                        {% endfor %}
                     </ul>
                 </div>
             {% else %}
