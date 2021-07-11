@@ -5,13 +5,15 @@
 {% block content %}
 <div class="container my-5">
     <div class="row">
-        <div class="col">
+        {% if edit %}
+        <div class="col-12 mb-4">
+                <h3>Update: {{ object.publisher_name }}</h3>
+        </div>
+        {% endif %}
+        <div class="col-12">
             <form method="post" class="row" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.errors }}
-                {% if edit %}
-                    <h1>Edit</h1>
-                {% endif %}
                 {% for field in form %}
                     {% if field.auto_id == 'id_domain_name' %}
                         <div class="mb-3 col-lg-6">
