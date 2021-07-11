@@ -82,15 +82,6 @@ class RecipeTable(tables.Table):
         </a>
         ''', value, value)
     
-    # @property
-    # def render_recipe_edit(self):
-    #     print(self.recipe_name)
-    #     return format_html('''
-    #     <a href="{}" type="button" class="btn btn-primary">
-    #         <i class="fas fa-edit"></i>
-    #     </a>
-    #     ''', self)
-    
     def render_recipe_publisher(self, value):
         return object_list_rend(value, 'recipe_publisher')
 
