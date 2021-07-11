@@ -163,7 +163,7 @@ class PublisherDelete(DeleteView):
 
 def publisher_detail(request, publisher_id):
     publisher_obj = get_object_or_404(Publisher, pk=publisher_id)
-    return render(request, 'recipes/publisher_detail.html', {'publisher_obj': publisher_obj})
+    return render(request, 'recipes/publisher_detail.html', {'publisher_obj': publisher_obj, 'publisher_detail': True})
 
 ####################
 # Autocomplete views

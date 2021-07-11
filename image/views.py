@@ -43,7 +43,7 @@ class FileDelete(DeleteView):
 
 def file_detail(request, file_id):
     file_obj = get_object_or_404(ImageFile, pk=file_id)
-    return render(request, 'image/file_detail.html', {'file_obj': file_obj})
+    return render(request, 'image/file_detail.html', {'file_obj': file_obj, 'file_detail': True})
 
 ####################
 # Autocomplete views
