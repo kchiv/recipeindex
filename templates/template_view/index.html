@@ -3,6 +3,7 @@
 {% load static %}
 {% load render_table from django_tables2 %}
 
+<!-- Scripts Block -->
 {% block script %}
 <script>
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -17,9 +18,12 @@ myModal.addEventListener('shown.bs.modal', function () {
   myInput.focus()
 })
 </script>
+{{ filter.form.media }}
 {% endblock %}
 
-{% block content %}
+
+<!-- CSS Block -->
+{% block css %}
 <style>
     .scrollspy-body {
         position: relative;
@@ -54,7 +58,9 @@ myModal.addEventListener('shown.bs.modal', function () {
         width: 40%;
     }
 </style>
-{{ filter.form.media }}
+{% endblock %}
+
+{% block content %}
 <div class="container mt-5">
     <div class="row">
         <!-- Buttons -->
