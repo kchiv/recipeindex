@@ -33,6 +33,43 @@ def object_list_sizing(value, field_name):
             full_html_str = '—'
         return format_html(full_html_str)
 
+class PublisherTable(tables.Table):
+
+    class Meta:
+        model = Publisher
+        # order_by = '-recipe_rating'
+        # attrs = {'style': 'width: 300%;'}
+        # template_name = 'django_tables2/bootstrap-responsive.html'
+        # fields = (
+        #     'recipe_name_custom',
+        #     'recipe_url',
+        #     'recipe_edit',
+        #     'recipe_publisher', 
+        #     'recipe_author',
+        #     'recipe_type',
+        #     'recipe_rating',
+        #     'recipe_full_ingredients',
+        #     'recipe_full_steps',
+        #     'recipe_alterations',
+        #     'recipe_notes',
+        #     'recipe_instantpot',
+        #     'recipe_cuisine',
+        #     'recipe_meal',
+        #     'recipe_dish',
+        #     'recipe_category',
+        #     'recipe_ingredients',
+        #     'recipe_event',
+        #     'recipe_calories',
+        #     'recipe_protein',
+        #     'recipe_difficulty',
+        #     'recipe_time',
+        #     'recipe_time_amount',
+        #     'recipe_priority',
+        #     'recipe_wayback_url',
+        #     'recipe_file_storage',
+        #     'recipe_created_date'
+        #     )
+
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
     recipe_url = columns.base.Column(verbose_name='URL')
