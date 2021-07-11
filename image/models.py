@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from django.dispatch import receiver
@@ -7,6 +8,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 # Create your models here.
 
 class ImageFile(models.Model):
+    image_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     image_name = models.CharField(max_length=400, blank=True, help_text='Name of image.')
     image_file = models.FileField(upload_to='img', max_length=900)
     publication_date = models.DateTimeField(default=timezone.now)
