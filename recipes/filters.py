@@ -44,6 +44,36 @@ def filter_not_empty_related(queryset, name, value):
         lookup = '__'.join([name, 'isnull'])
         return queryset.exclude(**{lookup: ''})
 
+class PublisherFilter(django_filters.FilterSet):
+    publisher_name = django_filters.CharFilter(
+        field_name='publisher_name',
+        lookup_expr='icontains',
+        label='Name', 
+        widget=forms.TextInput(attrs={'class':'form-control'}))
+    domain_name = django_filters.CharFilter(
+        field_name='domain_name',
+        lookup_expr='icontains',
+        label='Domain', 
+        widget=forms.TextInput(attrs={'class':'form-control'}))
+    channel_url = django_filters.CharFilter(
+        field_name='channel_url',
+        lookup_expr='icontains',
+        label='Channel', 
+        widget=forms.TextInput(attrs={'class':'form-control'}))
+
+    class Meta:
+        model = Publisher
+        fields = [
+            'publisher_name',
+            'domain_name',
+            'channel_url',
+            'publisher_type'
+        ]
+    
+    def __init__(self, *args, **kwargs):
+        super(PublisherFilter, self).__init__(*args, **kwargs)
+        self.form.fields['publisher_type'].widget.attrs = {'class': 'form-select'}
+
 class RecipeFilter(django_filters.FilterSet):
     recipe_name_custom = django_filters.CharFilter(
         method=name_custom_filter,
