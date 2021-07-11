@@ -7,7 +7,7 @@ from recipes.models import Recipe, Publisher
 from image.models import ImageFile
 from recipes.tables import RecipeTable, PublisherTable
 from image.tables import FileTable
-from recipes.filters import RecipeFilter
+from recipes.filters import RecipeFilter, PublisherFilter
 from image.filters import FileFilter
 from django_tables2.views import SingleTableMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -29,7 +29,7 @@ class PublisherView(LoginRequiredMixin, SingleTableMixin, FilterView):
     model = Publisher
     table_class = PublisherTable
     template_name = 'template_view/index.html'
-    # filterset_class = RecipeFilter
+    filterset_class = PublisherFilter
     login_url = '/admin/'
     redirect_field_name = 'home'
 
