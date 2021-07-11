@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django_addanother.views import CreatePopupMixin
 # from django.core.exceptions import DoesNotExist
 from urllib.parse import urlparse
@@ -132,6 +132,17 @@ class PublisherCreate(CreatePopupMixin, CreateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'recipes/publisher_form.html'
+
+    def get_success_url(self):
+        return reverse('recipes:publisher_detail', kwargs={'publisher_id': self.object.pk})
+
+class PublisherEdit(UpdateView):
+    model = Publisher
+    form_class = PublisherForm
+    template_name = 'recipes/publisher_form.html'
+
+    def get_object(self):
+        return Publisher.objects.get(pk=self.kwargs['publisher_id'])
 
     def get_success_url(self):
         return reverse('recipes:publisher_detail', kwargs={'publisher_id': self.object.pk})
