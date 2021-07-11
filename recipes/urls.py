@@ -10,6 +10,7 @@ urlpatterns = [
     path('form/edit/<int:recipe_id>/', views.recipe_full_form_edit, name='recipe_full_form_edit'),
     path('form/delete/<int:recipe_id>/', views.recipe_delete, name='recipe_delete'),
     path('publisher-form/', views.PublisherCreate.as_view(), name='publisher_full_form'),
+    path('publisher-form/edit/<int:publisher_id>/', views.PublisherEdit.as_view(), name='publisher_full_form_edit'),
     path('<int:recipe_id>/', views.recipe_detail, name='recipe_detail'),
     path('publisher/<int:publisher_id>/', views.publisher_detail, name='publisher_detail'),
     url(r'^author-autocomplete/$', views.AuthorAutocomplete.as_view(create_field='author_name'), name='author-autocomplete'),
