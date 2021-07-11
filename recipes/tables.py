@@ -36,7 +36,7 @@ def object_list_sizing(value, field_name):
 class PublisherTable(tables.Table):
     publisher_name = columns.base.Column(verbose_name='Name')
     recipe_edit = columns.TemplateColumn(
-        '<a class="btn btn-secondary" href="{% url \'recipes:recipe_full_form_edit\' record.id %}"><i class="fas fa-edit"></i></a>', 
+        '<a class="btn btn-secondary" href="{% url \'recipes:publisher_full_form_edit\' record.id %}"><i class="fas fa-edit"></i></a>', 
         verbose_name='Edit', 
         orderable=False)
     publisher_type = columns.base.Column(verbose_name='Type')
