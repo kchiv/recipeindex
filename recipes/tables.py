@@ -1,5 +1,6 @@
 from django.utils.html import format_html
 from django_tables2 import tables, columns
+from django_tables2.utils import A
 from .models import Recipe, Publisher
 
 # class NameColumn(tables.Column):
@@ -35,6 +36,13 @@ def object_list_sizing(value, field_name):
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
     recipe_url = columns.base.Column(verbose_name='URL')
+    # recipe_edit = columns.LinkColumn('recipes:recipe_full_form_edit', text='', verbose_name='Edit', orderable=False, args=[A('pk')], attrs={
+    #     "a": {"class": "btn btn-secondary fas fa-edit"}
+    # })
+    recipe_edit = columns.TemplateColumn(
+        '<a class="btn btn-secondary" href="{% url \'recipes:recipe_full_form_edit\' record.id %}"><i class="fas fa-edit"></i></a>', 
+        verbose_name='Edit', 
+        orderable=False)
     recipe_publisher = columns.base.Column(verbose_name='Publisher', orderable=False)
     recipe_author = columns.base.Column(verbose_name='Author', orderable=False)
     recipe_type = columns.base.Column(verbose_name='Type', accessor='recipe_publisher', orderable=False)
@@ -73,6 +81,15 @@ class RecipeTable(tables.Table):
             <i class="fas fa-external-link-alt"></i>
         </a>
         ''', value, value)
+    
+    # @property
+    # def render_recipe_edit(self):
+    #     print(self.recipe_name)
+    #     return format_html('''
+    #     <a href="{}" type="button" class="btn btn-primary">
+    #         <i class="fas fa-edit"></i>
+    #     </a>
+    #     ''', self)
     
     def render_recipe_publisher(self, value):
         return object_list_rend(value, 'recipe_publisher')
@@ -193,6 +210,7 @@ class RecipeTable(tables.Table):
         fields = (
             'recipe_name_custom',
             'recipe_url',
+            'recipe_edit',
             'recipe_publisher', 
             'recipe_author',
             'recipe_type',
