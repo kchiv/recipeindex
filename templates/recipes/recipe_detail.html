@@ -403,7 +403,7 @@
             {% endif %}
 
             <h5 id="item-files">Files</h5>
-            {% if recipe.recipe_file_storage %}
+            {% if recipe.recipe_file_storage.all %}
                 <div class="my-4">
                     <ul>
                         {% for fs in recipe.recipe_file_storage.all %}
