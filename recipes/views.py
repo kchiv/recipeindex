@@ -146,6 +146,11 @@ class PublisherEdit(UpdateView):
 
     def get_success_url(self):
         return reverse('publisher_table')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['edit'] = True
+        return context
 
 def publisher_detail(request, publisher_id):
     publisher_obj = get_object_or_404(Publisher, pk=publisher_id)
