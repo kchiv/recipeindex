@@ -8,20 +8,27 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
+          <!-- tables -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+              Tables
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="{% url 'recipes:publisher_full_form' %}">Publisher</a></li>
+              <li><a class="dropdown-item" href="{% url 'images:file_form' %}">File</a></li>
             </ul>
           </li>
+          <!-- create -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Create
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'recipes:publisher_full_form' %}">Publisher</a></li>
+              <li><a class="dropdown-item" href="{% url 'images:file_form' %}">File</a></li>
+            </ul>
+          </li>
+          <!-- buttons -->
           <li class="nav-item m-1">
             <a class="btn btn-primary" href="{% url 'recipes:recipe_url_form' %}">Recipe URL <i class="fas fa-plus"></i></a>
           </li>
