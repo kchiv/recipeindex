@@ -20,6 +20,11 @@ class RecipeView(LoginRequiredMixin, SingleTableMixin, FilterView):
     login_url = '/admin/'
     redirect_field_name = 'home'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recipe_index_table'] = True
+        return context
+
 class PublisherView(LoginRequiredMixin, SingleTableMixin, FilterView):
     model = Publisher
     table_class = PublisherTable
@@ -28,6 +33,11 @@ class PublisherView(LoginRequiredMixin, SingleTableMixin, FilterView):
     login_url = '/admin/'
     redirect_field_name = 'home'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['publisher_index_table'] = True
+        return context
+
 class FileView(LoginRequiredMixin, SingleTableMixin, FilterView):
     model = ImageFile
     table_class = FileTable
@@ -35,3 +45,8 @@ class FileView(LoginRequiredMixin, SingleTableMixin, FilterView):
     filterset_class = FileFilter
     login_url = '/admin/'
     redirect_field_name = 'home'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['file_index_table'] = True
+        return context
