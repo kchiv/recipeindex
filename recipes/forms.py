@@ -47,3 +47,4 @@ class PublisherForm(forms.ModelForm):
     class Meta:
         model = models.Publisher
         fields = '__all__'
+        exclude = ['publisher_user']
