@@ -29,10 +29,21 @@
             <a class="btn btn-primary" href="{% url 'recipes:recipe_full_form' %}">Full Recipe <i class="fas fa-plus"></i></a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-light" type="submit">Search</button>
-        </form>
+        {% if recipe_detail %}
+        <div class="d-flex">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="btn btn-secondary me-2" href="{% url 'recipes:recipe_full_form_edit' recipe.id %}">Edit <i class="fas fa-edit"></i></a>
+            </li>
+            <li class="nav-item">
+              <form method="post" action="{% url 'recipes:recipe_delete' recipe.id  %}">
+                {% csrf_token %}
+                  <button class="btn btn-danger" type="submit" value="Delete">Delete <i class="fas fa-trash-alt"></i></button>
+              </form>
+            </li>
+          </ul>
+        </div>
+        {% endif %}
       </div>
     </div>
   </nav>
