@@ -11,7 +11,7 @@
         </div>
         {% endif %}
         <div class="col-12">
-            <form method="post" class="row" enctype="multipart/form-data">
+            <form method="post" class="row" id="publisherForm">
                 {% csrf_token %}
                 {{ form.errors }}
                 {% for field in form %}
@@ -28,9 +28,28 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-                <input class="btn btn-primary" type="submit" value="Submit">
             </form>
         </div>
+    </div>
+    {% if edit %}
+        <form class="row" method="post" action="{% url 'recipes:publisher_delete' object.id  %}" id="deleteForm">
+            {% csrf_token %}
+        </form>
+    {% endif %}
+    <!-- Buttons -->
+    <div class="row my-5">
+        {% if edit %}
+        <div class="col-md-6 text-center">
+            <button class="btn btn-primary w-50" type="submit" value="Update" form="publisherForm">Update <i class="fas fa-pen"></i></button>
+        </div>
+        <div class="col-md-6 text-center">
+            <button class="btn btn-danger w-50" type="submit" value="Delete" form="deleteForm">Delete <i class="fas fa-trash-alt"></i></button>
+        </div>
+        {% else %}
+        <div class="col-12 text-center">
+            <button class="btn btn-primary w-50" type="submit" value="Submit" form="publisherForm">Submit <i class="fas fa-plus"></i></button>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
