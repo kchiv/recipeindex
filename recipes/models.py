@@ -73,7 +73,8 @@ class Size(models.Model):
         return self.size_name
 
 class Event(models.Model):
-    event_name = models.CharField(max_length=400, unique=True, blank=False)
+    event_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    event_name = models.CharField(max_length=400, unique=False, blank=False)
 
     def __str__(self):
         return self.event_name
