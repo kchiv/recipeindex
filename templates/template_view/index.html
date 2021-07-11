@@ -68,7 +68,13 @@ myModal.addEventListener('shown.bs.modal', function () {
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="fas fa-filter"></i> Filter
             </button>
-            <a href="{% url 'home' %}" class="btn btn-secondary ms-3"><i class="fas fa-sync-alt"></i> Refresh</a>
+            {% if recipe_index_table %}
+                <a href="{% url 'home' %}" class="btn btn-secondary ms-3"><i class="fas fa-sync-alt"></i> Refresh</a>
+            {% elif publisher_index_table %}
+                <a href="{% url 'publisher_table' %}" class="btn btn-secondary ms-3"><i class="fas fa-sync-alt"></i> Refresh</a>
+            {% elif file_index_table %}
+                <a href="{% url 'file_table' %}" class="btn btn-secondary ms-3"><i class="fas fa-sync-alt"></i> Refresh</a>
+            {% endif %}
         </div>
         <!-- Table -->
         {% render_table table %}
