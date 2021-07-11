@@ -74,38 +74,7 @@ myModal.addEventListener('shown.bs.modal', function () {
                 <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="GET">
-                    <div class="modal-body">
-                        <div class="row">
-                            {% if filter %}
-                                {% for field in filter.form %}
-                                    {% if field.auto_id == 'id_recipe_rating' or field.auto_id == 'id_recipe_time_amount' %}
-                                        <div class="mb-3 col-lg-6">
-                                            <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
-                                            <div class="input-group">
-                                                {{ field }}
-                                            </div>
-                                        </div>
-                                    {% elif field.auto_id == 'id_publication_date' or field.auto_id == 'id_recipe_created_date' or field.auto_id == 'id_recipe_publisher' or field.auto_id == 'id_recipe_type' or field.auto_id == 'id_recipe_author' or field.auto_id == 'id_recipe_cuisine' or field.auto_id == 'id_recipe_meal' or field.auto_id == 'id_recipe_dish' or field.auto_id == 'id_recipe_category' or field.auto_id == 'id_recipe_ingredients' or field.auto_id == 'id_recipe_event' %}
-                                        <div class="mb-3 col-lg-6">
-                                            <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
-                                            <br>
-                                            {{ field }}
-                                        </div>
-                                    {% else %}
-                                        <div class="mb-3 col-lg-6">
-                                            <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
-                                            {{ field }}
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                <div class="modal-footer">
-                    <input class="btn btn-primary" type="submit" />
-                </div>
-                </form>
+                {% include 'partials/_filter_form.html' %}
             </div>
             </div>
         </div>
