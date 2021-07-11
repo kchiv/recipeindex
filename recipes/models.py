@@ -29,6 +29,9 @@ class Publisher(models.Model):
     domain_name = models.CharField(max_length=400, unique=False, blank=True)
     channel_url = models.URLField(max_length=600, blank=True)
 
+    def get_absolute_url(self):
+        return reverse('recipes:publisher_detail', kwargs={'publisher_id': self.pk})
+
     def __str__(self):
         return self.publisher_name
 
