@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
@@ -21,6 +22,9 @@ class ImageFile(models.Model):
                 })
         except ObjectDoesNotExist:
             pass
+    
+    def get_absolute_url(self):
+        return reverse('images:file_detail', kwargs={'file_id': self.pk})
 
     def __str__(self):
         return self.image_file.name
