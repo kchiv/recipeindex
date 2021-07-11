@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_addanother.views import CreatePopupMixin
 # from django.core.exceptions import DoesNotExist
 from urllib.parse import urlparse
@@ -151,6 +151,15 @@ class PublisherEdit(UpdateView):
         context = super().get_context_data(**kwargs)
         context['edit'] = True
         return context
+
+class PublisherDelete(DeleteView):
+    model = Publisher
+
+    def get_object(self):
+        return Publisher.objects.get(pk=self.kwargs['publisher_id'])
+
+    def get_success_url(self):
+        return reverse('publisher_table')
 
 def publisher_detail(request, publisher_id):
     publisher_obj = get_object_or_404(Publisher, pk=publisher_id)
