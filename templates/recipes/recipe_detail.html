@@ -130,7 +130,7 @@
                 {% endif %}
                 <ul>
                     <!-- Publisher -->
-                    {% if recipe.recipe_publisher %}
+                    {% if recipe.recipe_publisher.all %}
                     <li><strong>Publisher:</strong> 
                         {% for publisher in recipe.recipe_publisher.all %}
                             {% if publisher.channel_url %}
