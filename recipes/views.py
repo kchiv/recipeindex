@@ -134,7 +134,7 @@ class PublisherCreate(CreatePopupMixin, CreateView):
     template_name = 'recipes/publisher_form.html'
 
     def get_success_url(self):
-        return reverse('recipes:publisher_detail', kwargs={'publisher_id': self.object.pk})
+        return reverse('publisher_table')
 
 class PublisherEdit(UpdateView):
     model = Publisher
@@ -145,7 +145,7 @@ class PublisherEdit(UpdateView):
         return Publisher.objects.get(pk=self.kwargs['publisher_id'])
 
     def get_success_url(self):
-        return reverse('recipes:publisher_detail', kwargs={'publisher_id': self.object.pk})
+        return reverse('publisher_table')
 
 def publisher_detail(request, publisher_id):
     publisher_obj = get_object_or_404(Publisher, pk=publisher_id)
