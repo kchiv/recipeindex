@@ -8,7 +8,7 @@ class FileFilter(django_filters.FilterSet):
     image_name = django_filters.CharFilter(
         field_name='image_name',
         lookup_expr='icontains',
-        label='Object Name', 
+        label='Name', 
         widget=forms.TextInput(attrs={'class':'form-control'}))
     image_file = django_filters.CharFilter(
         field_name='image_file',
