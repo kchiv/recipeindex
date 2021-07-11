@@ -18,6 +18,15 @@ def object_list_rend(value, field_name):
             full_html_str = '—'
         return format_html(full_html_str)
 
+def object_list_rend_foreign(value, field_name):
+        full_html_str = ''
+        if value:
+            obj_str = '<a href="?{}={}">{}</a>'.format(field_name, value.id, value)
+            full_html_str += obj_str
+        else:
+            full_html_str = '—'
+        return format_html(full_html_str)
+
 def object_list_sizing(value, field_name):
         full_html_str = ''
         if value:
@@ -35,7 +44,11 @@ def object_list_sizing(value, field_name):
 
 class PublisherTable(tables.Table):
     publisher_name = columns.base.Column(verbose_name='Name')
-    recipe_edit = columns.TemplateColumn(
+    publisher_site = columns.TemplateColumn(
+        '<a class="btn btn-primary" href="//{{ record.domain_name }}/"><i class="fas fa-link"></i></a>', 
+        verbose_name='Site', 
+        orderable=False)
+    publisher_edit = columns.TemplateColumn(
         '<a class="btn btn-secondary" href="{% url \'recipes:publisher_full_form_edit\' record.id %}"><i class="fas fa-edit"></i></a>', 
         verbose_name='Edit', 
         orderable=False)
@@ -43,9 +56,38 @@ class PublisherTable(tables.Table):
     domain_name = columns.base.Column(verbose_name='Domain')
     channel_url = columns.base.Column(verbose_name='Channel')
 
+    def render_publisher_name(self, value, record):
+        return format_html(
+            '<a href="{}" type="button" class="btn btn-secondary">{}</a>',
+            record.get_absolute_url(), 
+            record.publisher_name)
+    
+    def render_publisher_type(self, value):
+        return object_list_rend_foreign(value, 'publisher_type')
+    
+    def render_domain_name(self, value, record):
+        return format_html(
+            '<a href="//{}/" target="_blank">{}</a>', 
+            record.domain_name,
+            record.domain_name)
+    
+    def render_channel_url(self, value, record):
+        return format_html(
+            '<a href="{}" target="_blank">{}</a>', 
+            record.channel_url,
+            record.channel_url)
+
     class Meta:
         model = Publisher
         template_name = 'django_tables2/bootstrap-responsive.html'
+        fields = (
+            'publisher_name',
+            'publisher_site',
+            'publisher_edit',
+            'publisher_type',
+            'domain_name',
+            'channel_url'
+        )
 
 class RecipeTable(tables.Table):
     recipe_name_custom = columns.base.Column(verbose_name='Recipe Name')
