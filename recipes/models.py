@@ -30,8 +30,12 @@ class Publisher(models.Model):
     publisher_type = models.ForeignKey(Type, blank=True, on_delete=models.SET_NULL, null=True)
     domain_name = models.CharField(max_length=400, unique=False, blank=True)
     channel_url = models.URLField(max_length=600, blank=True)
-    ingredients_xpath = models.CharField(max_length=1000, unique=False, blank=True)
-    directions_xpath = models.CharField(max_length=1000, unique=False, blank=True)
+    ingredients_scr_element = models.CharField(max_length=500, unique=False, blank=True)
+    ingredients_scr_attr = models.CharField(max_length=500, unique=False, blank=True)
+    ingredients_scr_value = models.CharField(max_length=500, unique=False, blank=True)
+    directions_scr_element = models.CharField(max_length=500, unique=False, blank=True)
+    directions_scr_attr = models.CharField(max_length=500, unique=False, blank=True)
+    directions_scr_value = models.CharField(max_length=500, unique=False, blank=True)
 
     def get_absolute_url(self):
         return reverse('recipes:publisher_detail', kwargs={'publisher_id': self.pk})
