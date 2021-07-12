@@ -137,6 +137,12 @@ class PublisherCreate(CreatePopupMixin, CreateView):
 
     def get_success_url(self):
         return reverse('publisher_table')
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.publisher_user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 class PublisherEdit(UpdateView):
     model = Publisher
@@ -144,7 +150,7 @@ class PublisherEdit(UpdateView):
     template_name = 'recipes/publisher_form.html'
 
     def get_object(self):
-        return Publisher.objects.get(pk=self.kwargs['publisher_id'])
+        return Publisher.objects.get(pk=self.kwargs['publisher_id'], publisher_user=self.request.user)
 
     def get_success_url(self):
         return reverse('publisher_table')
@@ -158,13 +164,13 @@ class PublisherDelete(DeleteView):
     model = Publisher
 
     def get_object(self):
-        return Publisher.objects.get(pk=self.kwargs['publisher_id'])
+        return Publisher.objects.get(pk=self.kwargs['publisher_id'], publisher_user=self.request.user)
 
     def get_success_url(self):
         return reverse('publisher_table')
 
 def publisher_detail(request, publisher_id):
-    publisher_obj = get_object_or_404(Publisher, pk=publisher_id)
+    publisher_obj = get_object_or_404(Publisher, pk=publisher_id, publisher_user=request.user)
     return render(request, 'recipes/publisher_detail.html', {'publisher_obj': publisher_obj, 'publisher_detail': True})
 
 ####################
