@@ -73,6 +73,13 @@ class PublisherFilter(django_filters.FilterSet):
     def __init__(self, *args, **kwargs):
         super(PublisherFilter, self).__init__(*args, **kwargs)
         self.form.fields['publisher_type'].widget.attrs = {'class': 'form-select'}
+    
+    @property
+    def qs(self):
+        parent = super().qs
+        active_user = getattr(self.request, 'user', None)
+
+        return parent.filter(publisher_user=active_user)
 
 class RecipeFilter(django_filters.FilterSet):
     recipe_name_custom = django_filters.CharFilter(
