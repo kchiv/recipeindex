@@ -19,14 +19,14 @@ class Type(models.Model):
 
 class Author(models.Model):
     author_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    author_name = models.CharField(max_length=400, unique=True, blank=False)
+    author_name = models.CharField(max_length=400, unique=False, blank=False)
 
     def __str__(self):
         return self.author_name
 
 class Publisher(models.Model):
     publisher_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    publisher_name = models.CharField(max_length=400, unique=True, blank=False)
+    publisher_name = models.CharField(max_length=400, unique=False, blank=False)
     publisher_type = models.ForeignKey(Type, blank=True, on_delete=models.SET_NULL, null=True)
     domain_name = models.CharField(max_length=400, unique=False, blank=True)
     channel_url = models.URLField(max_length=600, blank=True)
@@ -39,21 +39,21 @@ class Publisher(models.Model):
 
 class Cuisine(models.Model):
     cuisine_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    cuisine_name = models.CharField(max_length=400, unique=True, blank=False)
+    cuisine_name = models.CharField(max_length=400, unique=False, blank=False)
 
     def __str__(self):
         return self.cuisine_name
 
 class Meal(models.Model):
     meal_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    meal_name = models.CharField(max_length=400, unique=True, blank=False)
+    meal_name = models.CharField(max_length=400, unique=False, blank=False)
 
     def __str__(self):
         return self.meal_name
 
 class Dish(models.Model):
     dish_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    dish_name = models.CharField(max_length=400, unique=True, blank=False)
+    dish_name = models.CharField(max_length=400, unique=False, blank=False)
 
     class Meta:
         verbose_name_plural = 'dishes'
@@ -63,7 +63,7 @@ class Dish(models.Model):
 
 class Category(models.Model):
     category_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    category_name = models.CharField(max_length=400, unique=True, blank=False)
+    category_name = models.CharField(max_length=400, unique=False, blank=False)
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -87,7 +87,7 @@ class Event(models.Model):
 
 class Recipe(models.Model):
     recipe_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    recipe_url = models.URLField(max_length=600, unique=True, blank=True)
+    recipe_url = models.URLField(max_length=600, unique=False, blank=True)
     recipe_name_custom = models.CharField(max_length=500, unique=False, blank=False)
     recipe_name_title_tag = models.CharField(max_length=500, unique=False, blank=True)
     recipe_name_h1 = models.CharField(max_length=400, unique=False, blank=True)

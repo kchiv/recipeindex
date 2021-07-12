@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class IngredientCategory(models.Model):
     category_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    category_name = models.CharField(max_length=400, unique=True, blank=False)
+    category_name = models.CharField(max_length=400, unique=False, blank=False)
 
     class Meta:
         verbose_name_plural = 'ingredient categories'
@@ -15,7 +15,7 @@ class IngredientCategory(models.Model):
 
 class Ingredient(models.Model):
     ingredient_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    ingredient_name = models.CharField(max_length=400, unique=True, blank=False)
+    ingredient_name = models.CharField(max_length=400, unique=False, blank=False)
     ingredient_category = models.ManyToManyField(IngredientCategory, blank=True)
 
     def __str__(self):
