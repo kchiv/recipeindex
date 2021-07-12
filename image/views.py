@@ -57,7 +57,7 @@ def file_detail(request, file_id):
 
 class FileAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = ImageFile.objects.all()
+        qs = ImageFile.objects.filter(image_user=self.request.user)
 
         if self.q:
             qs = qs.filter(image_file__icontains=self.q)
