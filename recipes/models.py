@@ -18,12 +18,14 @@ class Type(models.Model):
         return self.type_name
 
 class Author(models.Model):
+    author_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     author_name = models.CharField(max_length=400, unique=True, blank=False)
 
     def __str__(self):
         return self.author_name
 
 class Publisher(models.Model):
+    publisher_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     publisher_name = models.CharField(max_length=400, unique=True, blank=False)
     publisher_type = models.ForeignKey(Type, blank=True, on_delete=models.SET_NULL, null=True)
     domain_name = models.CharField(max_length=400, unique=False, blank=True)
@@ -36,18 +38,21 @@ class Publisher(models.Model):
         return self.publisher_name
 
 class Cuisine(models.Model):
+    cuisine_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     cuisine_name = models.CharField(max_length=400, unique=True, blank=False)
 
     def __str__(self):
         return self.cuisine_name
 
 class Meal(models.Model):
+    meal_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     meal_name = models.CharField(max_length=400, unique=True, blank=False)
 
     def __str__(self):
         return self.meal_name
 
 class Dish(models.Model):
+    dish_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     dish_name = models.CharField(max_length=400, unique=True, blank=False)
 
     class Meta:
@@ -57,6 +62,7 @@ class Dish(models.Model):
         return self.dish_name
 
 class Category(models.Model):
+    category_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     category_name = models.CharField(max_length=400, unique=True, blank=False)
 
     class Meta:
