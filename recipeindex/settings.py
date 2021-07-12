@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-s*r2%p8$bmyyfw_cn$mqm-*+hx%cb**q^agdl6s(jq+e$w0!3q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','recipeindex.herokuapp.com']
 
 
 # Application definition
