@@ -28,3 +28,10 @@ class FileFilter(django_filters.FilterSet):
     def __init__(self, *args, **kwargs):
         super(FileFilter, self).__init__(*args, **kwargs)
         self.form.fields['publication_date'].widget.attrs = {'class': 'form-control date-between'}
+    
+    @property
+    def qs(self):
+        parent = super().qs
+        active_user = getattr(self.request, 'user', None)
+
+        return parent.filter(image_user=active_user)
