@@ -228,5 +228,5 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
-
-django_heroku.settings(locals())
+if os.environ.get('PROD') == True:
+    django_heroku.settings(locals())
