@@ -64,7 +64,9 @@ def recipe_full_form(request):
         form = RecipeForm(request.POST)
 
         if form.is_valid():
-            obj = form.save()
+            obj = form.save(commit=False)
+            obj.recipe_user = request.user
+            obj.save()
             return HttpResponseRedirect(reverse('recipes:recipe_detail', kwargs={'recipe_id': obj.id}))
     else:
         url = request.session.get('url_scrape')
