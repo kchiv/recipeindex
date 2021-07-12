@@ -227,12 +227,15 @@ class CategoryAutocomplete(autocomplete.Select2QuerySetView):
 
 class EventAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Event.objects.all()
+        qs = Event.objects.filter(event_user=self.request.user)
 
         if self.q:
             qs = qs.filter(event_name__icontains=self.q)
         
         return qs
+
+    def create_object(self, text):
+        return self.get_queryset().create(**{self.create_field: text, 'event_user': self.request.user})
 
 class TypeAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
