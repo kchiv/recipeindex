@@ -53,6 +53,18 @@ def recipe_url_form(request):
         for h1 in soup.find_all('h1'):
             # print(h1.get_text())
             request.session['h1_scrape'] = h1.get_text()
+        
+        # scrape publisher ingredients + steps
+        hostname = urlparse(url_request).hostname
+        publisher_lookup = Publisher.objects.filter(domain_name__icontains=hostname, publisher_user=request.user).first()
+        if publisher_lookup:
+            print(publisher_lookup.ingredients_xpath)
+            tester = soup.find_all('div', {'class': 'ingredients'})
+            html_str = ''
+            for t in tester:
+                html_str += str(t)
+            print(html_str)
+            request.session['ingredient_scrape'] = str(html_str)
 
         return redirect('recipes:recipe_full_form')
 
@@ -76,6 +88,7 @@ def recipe_full_form(request):
                 return HttpResponseRedirect(reverse('recipes:recipe_detail', kwargs={'recipe_id': obj.id}))
     else:
         url = request.session.get('url_scrape')
+        ingredient_list = request.session.get('ingredient_scrape')
         # Strip URL to root domain
         hostname = urlparse(url).hostname
         # Lookup publisher object using domain name
@@ -98,7 +111,8 @@ def recipe_full_form(request):
             'recipe_url': url,
             'recipe_name_title_tag': title,
             'recipe_name_h1': h1,
-            'recipe_publisher': publisher_lookup
+            'recipe_publisher': publisher_lookup,
+            'recipe_full_ingredients': ingredient_list
         }
         form = RecipeForm(initial=data)
 
