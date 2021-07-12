@@ -15,6 +15,12 @@ class FileCreate(CreatePopupMixin, CreateView):
 
     def get_success_url(self):
         return reverse('images:file_detail', kwargs={'file_id': self.object.pk})
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.image_user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 class FileEdit(UpdateView):
     model = ImageFile
@@ -22,7 +28,7 @@ class FileEdit(UpdateView):
     template_name = 'image/file_form.html'
 
     def get_object(self):
-        return ImageFile.objects.get(pk=self.kwargs['file_id'])
+        return ImageFile.objects.get(pk=self.kwargs['file_id'], image_user=self.request.user)
 
     def get_success_url(self):
         return reverse('file_table')
@@ -36,13 +42,13 @@ class FileDelete(DeleteView):
     model = ImageFile
 
     def get_object(self):
-        return ImageFile.objects.get(pk=self.kwargs['file_id'])
+        return ImageFile.objects.get(pk=self.kwargs['file_id'], image_user=self.request.user)
 
     def get_success_url(self):
         return reverse('file_table')
 
 def file_detail(request, file_id):
-    file_obj = get_object_or_404(ImageFile, pk=file_id)
+    file_obj = get_object_or_404(ImageFile, pk=file_id, image_user=request.user)
     return render(request, 'image/file_detail.html', {'file_obj': file_obj, 'file_detail': True})
 
 ####################
