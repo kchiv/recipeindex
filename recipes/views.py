@@ -112,7 +112,7 @@ def recipe_full_form_edit(request, recipe_id):
     return render(request, 'recipes/recipe_full_form.html', {'form': form, 'edit': True, 'instance': instance})
 
 def recipe_delete(request, recipe_id):
-    instance = Recipe.objects.get(pk=recipe_id)
+    instance = Recipe.objects.get(pk=recipe_id, recipe_user=request.user)
     if request.method == 'POST':
         instance.delete()
         return HttpResponseRedirect(reverse('home'))
