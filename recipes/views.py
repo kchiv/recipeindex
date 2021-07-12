@@ -99,7 +99,7 @@ def recipe_full_form(request):
     return render(request, 'recipes/recipe_full_form.html', {'form': form})
 
 def recipe_full_form_edit(request, recipe_id):
-    instance = Recipe.objects.get(pk=recipe_id)
+    instance = Recipe.objects.get(pk=recipe_id, recipe_user=request.user)
     if request.method == 'POST':
         form = RecipeForm(request.POST, instance=instance)
 
