@@ -27,6 +27,13 @@
                 <h3>Update: {{ instance.recipe_name_custom|title }}</h3>
         </div>
         {% endif %}
+        {% if custom_error %}
+        <div class="col-12 mb-4">
+            <div class="alert alert-danger" role="alert">
+                {{ custom_error }}
+              </div>
+        </div>
+        {% endif %}
         <div class="col-12">
             <form method="post" class="row" id="recipeForm">
                 {% csrf_token %}
