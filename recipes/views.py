@@ -173,57 +173,75 @@ def publisher_detail(request, publisher_id):
 
 class AuthorAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Author.objects.all()
+        qs = Author.objects.filter(author_user=self.request.user)
 
         if self.q:
             qs = qs.filter(author_name__icontains=self.q)
         
         return qs
+    
+    def create_object(self, text):
+        return self.get_queryset().create(**{self.create_field: text, 'author_user': self.request.user})
 
 class PublisherAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Publisher.objects.all()
+        qs = Publisher.objects.filter(publisher_user=self.request.user)
 
         if self.q:
             qs = qs.filter(publisher_name__icontains=self.q)
         
         return qs
+    
+    def create_object(self, text):
+        return self.get_queryset().create(**{self.create_field: text, 'publisher_user': self.request.user})
 
 class CuisineAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Cuisine.objects.all()
+        qs = Cuisine.objects.filter(cuisine_user=self.request.user)
 
         if self.q:
             qs = qs.filter(cuisine_name__icontains=self.q)
         
         return qs
+    
+    def create_object(self, text):
+        return self.get_queryset().create(**{self.create_field: text, 'cuisine_user': self.request.user})
 
 class MealAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Meal.objects.all()
+        qs = Meal.objects.filter(meal_user=self.request.user)
 
         if self.q:
             qs = qs.filter(meal_name__icontains=self.q)
         
         return qs
+    
+    def create_object(self, text):
+        return self.get_queryset().create(**{self.create_field: text, 'meal_user': self.request.user})
 
 class DishAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Dish.objects.all()
+        qs = Dish.objects.filter(dish_user=self.request.user)
 
         if self.q:
             qs = qs.filter(dish_name__icontains=self.q)
         
         return qs
+    
+    def create_object(self, text):
+        return self.get_queryset().create(**{self.create_field: text, 'dish_user': self.request.user})
 
 class CategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Category.objects.all()
+        qs = Category.objects.filter(category_user=self.request.user)
 
         if self.q:
             qs = qs.filter(category_name__icontains=self.q)
         
         return qs
+    
+    def create_object(self, text):
+        return self.get_queryset().create(**{self.create_field: text, 'category_user': self.request.user})
 
 class EventAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
