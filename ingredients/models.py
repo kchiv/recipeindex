@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class IngredientCategory(models.Model):
+    category_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     category_name = models.CharField(max_length=400, unique=True, blank=False)
 
     class Meta:
@@ -12,6 +14,7 @@ class IngredientCategory(models.Model):
         return self.category_name
 
 class Ingredient(models.Model):
+    ingredient_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     ingredient_name = models.CharField(max_length=400, unique=True, blank=False)
     ingredient_category = models.ManyToManyField(IngredientCategory, blank=True)
 
