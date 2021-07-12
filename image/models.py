@@ -29,7 +29,10 @@ class ImageFile(models.Model):
         return reverse('images:file_detail', kwargs={'file_id': self.pk})
 
     def __str__(self):
-        return self.image_file.name
+        if self.image_name:
+            return self.image_name
+        else:
+            return self.image_file.name
 
 # Handles deletion on S3
 @receiver(models.signals.post_delete, sender=ImageFile)
