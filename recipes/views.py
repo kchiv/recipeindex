@@ -36,7 +36,7 @@ def recipe_url_form(request):
         url_request = request.POST['url']
 
         try:
-            url_lookup = Recipe.objects.get(recipe_url__exact=url_request)
+            url_lookup = Recipe.objects.get(recipe_url__exact=url_request, recipe_user=request.user)
             return render(request, 'recipes/recipe_url_form.html', {'error_message': 'URL already exists.'})
         except Recipe.DoesNotExist:
             pass
@@ -63,11 +63,17 @@ def recipe_full_form(request):
     if request.method == 'POST':
         form = RecipeForm(request.POST)
 
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.recipe_user = request.user
-            obj.save()
-            return HttpResponseRedirect(reverse('recipes:recipe_detail', kwargs={'recipe_id': obj.id}))
+        recipe_url_value = request.POST.get('recipe_url')
+        recipe_url_lookup = Recipe.objects.filter(recipe_url=recipe_url_value, recipe_user=request.user)
+
+        if recipe_url_lookup:
+            return render(request, 'recipes/recipe_full_form.html', {'form': form, 'custom_error': 'The submited URL already exists.'})
+        else:
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.recipe_user = request.user
+                obj.save()
+                return HttpResponseRedirect(reverse('recipes:recipe_detail', kwargs={'recipe_id': obj.id}))
     else:
         url = request.session.get('url_scrape')
         # Strip URL to root domain
