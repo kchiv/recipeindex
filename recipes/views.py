@@ -105,7 +105,7 @@ def recipe_full_form(request):
         # Strip URL to root domain
         hostname = urlparse(url).hostname
         # Lookup publisher object using domain name
-        publisher_lookup = Publisher.objects.filter(domain_name__icontains=hostname).first()
+        publisher_lookup = Publisher.objects.filter(domain_name__icontains=hostname, publisher_user=request.user).first()
         title = request.session.get('title_scrape')
 
         # Publisher object conditional
