@@ -97,6 +97,7 @@ def recipe_full_form(request):
                 obj = form.save(commit=False)
                 obj.recipe_user = request.user
                 obj.save()
+                form.save_m2m()
                 return HttpResponseRedirect(reverse('recipes:recipe_detail', kwargs={'recipe_id': obj.id}))
     else:
         url = request.session.get('url_scrape')
