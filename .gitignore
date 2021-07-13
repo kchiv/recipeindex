@@ -42,7 +42,7 @@ venv.bak/
 !.vscode/extensions.json 
 .history
 
-**/migrations
+**/migrations/00*
 *.DS_Store
 **/__pycache__
 **/.DS_Store
