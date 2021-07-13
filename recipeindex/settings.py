@@ -90,7 +90,8 @@ WSGI_APPLICATION = 'recipeindex.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if os.environ.get('PROD'):
+if os.environ.get('PROD') == True:
+    print('yay')
     # Heroku
     DATABASES = {
         'default': {
@@ -229,5 +230,5 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
-if os.environ.get('PROD'):
+if os.environ.get('PROD') == True:
     django_heroku.settings(locals())
