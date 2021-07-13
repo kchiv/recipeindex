@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'recipeindex.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if DEBUG == False:
+if os.environ.get('PROD') == True:
     # Heroku
     DATABASES = {
         'default': {
