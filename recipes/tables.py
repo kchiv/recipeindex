@@ -79,7 +79,7 @@ class PublisherTable(tables.Table):
 
     class Meta:
         model = Publisher
-        template_name = 'django_tables2/bootstrap-responsive.html'
+        template_name = 'tables/table.html'
         fields = (
             'publisher_name',
             'publisher_site',
