@@ -10,7 +10,6 @@ from image.tables import FileTable
 from recipes.filters import RecipeFilter, PublisherFilter
 from image.filters import FileFilter
 from django_tables2.views import SingleTableMixin
-from django_tables2.paginators import LazyPaginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class RecipeView(LoginRequiredMixin, SingleTableMixin, FilterView):
@@ -20,7 +19,6 @@ class RecipeView(LoginRequiredMixin, SingleTableMixin, FilterView):
     filterset_class = RecipeFilter
     login_url = '/admin/'
     redirect_field_name = 'home'
-    paginator_class = LazyPaginator
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
