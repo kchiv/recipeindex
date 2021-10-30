@@ -253,7 +253,7 @@ class RecipeTable(tables.Table):
         model = Recipe
         order_by = '-recipe_rating'
         attrs = {'style': 'width: 300%;'}
-        template_name = 'django_tables2/bootstrap-responsive.html'
+        template_name = 'tables/table.html'
         fields = (
             'recipe_name_custom',
             'recipe_url',
