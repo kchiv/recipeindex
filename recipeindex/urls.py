@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 from .views import RecipeView, PublisherView, FileView
 
 urlpatterns = [
@@ -25,4 +26,8 @@ urlpatterns = [
     path('recipes/', include('recipes.urls')),
     path('ingredients/', include('ingredients.urls')),
     path('images/', include('image.urls')),
+    path(
+        'login/', 
+        auth_views.LoginView.as_view(template_name='forms/user_signin.html'), 
+        name='signin'),
 ]
