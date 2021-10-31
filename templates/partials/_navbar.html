@@ -8,6 +8,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if request.user.is_authenticated %}
           <!-- tables -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,6 +36,7 @@
           <li class="nav-item m-1">
             <a class="btn btn-primary" href="{% url 'recipes:recipe_full_form' %}">Full Recipe <i class="fas fa-plus"></i></a>
           </li>
+        {% endif %}
         </ul>
         {% include 'partials/_navbar_detail_view_buttons.html' %}
         {% if request.user.is_authenticated %}

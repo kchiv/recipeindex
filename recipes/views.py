@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_addanother.views import CreatePopupMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.core.exceptions import DoesNotExist
 from urllib.parse import urlparse
 import requests
@@ -30,6 +32,7 @@ from .models import (
 # Recipe object views
 #####################
 
+@login_required()
 def recipe_url_form(request):
 
     if request.method == 'POST':
@@ -83,6 +86,7 @@ def recipe_url_form(request):
 
     return render(request, 'recipes/recipe_url_form.html')
 
+@login_required()
 def recipe_full_form(request):
     if request.method == 'POST':
         form = RecipeForm(request.POST)
@@ -133,6 +137,7 @@ def recipe_full_form(request):
 
     return render(request, 'recipes/recipe_full_form.html', {'form': form})
 
+@login_required()
 def recipe_full_form_edit(request, recipe_id):
     instance = Recipe.objects.get(pk=recipe_id, recipe_user=request.user)
     if request.method == 'POST':
@@ -146,6 +151,7 @@ def recipe_full_form_edit(request, recipe_id):
 
     return render(request, 'recipes/recipe_full_form.html', {'form': form, 'edit': True, 'instance': instance})
 
+@login_required()
 def recipe_delete(request, recipe_id):
     instance = Recipe.objects.get(pk=recipe_id, recipe_user=request.user)
     if request.method == 'POST':
@@ -156,6 +162,7 @@ def recipe_delete(request, recipe_id):
 
     return render(request, 'recipes/recipe_full_form.html', {'form': form, 'edit': True, 'instance': instance})
 
+@login_required()
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id, recipe_user=request.user)
     return render(request, 'recipes/recipe_detail.html', {'recipe': recipe, 'recipe_detail': True})
@@ -165,7 +172,7 @@ def recipe_detail(request, recipe_id):
 # Publisher object views
 ########################
 
-class PublisherCreate(CreatePopupMixin, CreateView):
+class PublisherCreate(LoginRequiredMixin, CreatePopupMixin, CreateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'recipes/publisher_form.html'
@@ -179,7 +186,7 @@ class PublisherCreate(CreatePopupMixin, CreateView):
         self.object.save()
         return super().form_valid(form)
 
-class PublisherEdit(UpdateView):
+class PublisherEdit(LoginRequiredMixin, UpdateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'recipes/publisher_form.html'
@@ -195,7 +202,7 @@ class PublisherEdit(UpdateView):
         context['edit'] = True
         return context
 
-class PublisherDelete(DeleteView):
+class PublisherDelete(LoginRequiredMixin, DeleteView):
     model = Publisher
 
     def get_object(self):
@@ -204,6 +211,7 @@ class PublisherDelete(DeleteView):
     def get_success_url(self):
         return reverse('publisher_table')
 
+@login_required()
 def publisher_detail(request, publisher_id):
     publisher_obj = get_object_or_404(Publisher, pk=publisher_id, publisher_user=request.user)
     return render(request, 'recipes/publisher_detail.html', {'publisher_obj': publisher_obj, 'publisher_detail': True})

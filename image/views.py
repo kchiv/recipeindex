@@ -2,13 +2,15 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_addanother.views import CreatePopupMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from dal import autocomplete
 from .models import ImageFile
 from .forms import FileForm
 
 # Create your views here.
 
-class FileCreate(CreatePopupMixin, CreateView):
+class FileCreate(LoginRequiredMixin, CreatePopupMixin, CreateView):
     model = ImageFile
     form_class = FileForm
     template_name = 'image/file_form.html'
@@ -22,7 +24,7 @@ class FileCreate(CreatePopupMixin, CreateView):
         self.object.save()
         return super().form_valid(form)
 
-class FileEdit(UpdateView):
+class FileEdit(LoginRequiredMixin, UpdateView):
     model = ImageFile
     form_class = FileForm
     template_name = 'image/file_form.html'
@@ -38,7 +40,7 @@ class FileEdit(UpdateView):
         context['edit'] = True
         return context
 
-class FileDelete(DeleteView):
+class FileDelete(LoginRequiredMixin, DeleteView):
     model = ImageFile
 
     def get_object(self):
@@ -47,6 +49,7 @@ class FileDelete(DeleteView):
     def get_success_url(self):
         return reverse('file_table')
 
+@login_required()
 def file_detail(request, file_id):
     file_obj = get_object_or_404(ImageFile, pk=file_id, image_user=request.user)
     return render(request, 'image/file_detail.html', {'file_obj': file_obj, 'file_detail': True})
