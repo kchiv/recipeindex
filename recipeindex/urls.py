@@ -30,4 +30,8 @@ urlpatterns = [
         'login/', 
         auth_views.LoginView.as_view(template_name='forms/user_signin.html'), 
         name='signin'),
+    path(
+        'signout/', 
+        auth_views.LogoutView.as_view(), 
+        name='signout'),
 ]
