@@ -58,7 +58,7 @@ class PublisherTable(tables.Table):
 
     def render_publisher_name(self, value, record):
         return format_html(
-            '<a href="{}" type="button" class="btn btn-secondary">{}</a>',
+            '<a href="{}" class="btn btn-secondary">{}</a>',
             record.get_absolute_url(), 
             record.publisher_name)
     
