@@ -17,7 +17,6 @@ class RecipeView(LoginRequiredMixin, SingleTableMixin, FilterView):
     table_class = RecipeTable
     template_name = 'template_view/index.html'
     filterset_class = RecipeFilter
-    login_url = '/admin/'
     redirect_field_name = 'home'
 
     def get_context_data(self, **kwargs):
@@ -30,7 +29,6 @@ class PublisherView(LoginRequiredMixin, SingleTableMixin, FilterView):
     table_class = PublisherTable
     template_name = 'template_view/index.html'
     filterset_class = PublisherFilter
-    login_url = '/admin/'
     redirect_field_name = 'home'
 
     def get_context_data(self, **kwargs):
@@ -43,7 +41,6 @@ class FileView(LoginRequiredMixin, SingleTableMixin, FilterView):
     table_class = FileTable
     template_name = 'template_view/index.html'
     filterset_class = FileFilter
-    login_url = '/admin/'
     redirect_field_name = 'home'
 
     def get_context_data(self, **kwargs):
