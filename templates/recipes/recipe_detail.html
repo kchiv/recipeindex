@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block title %}{{ recipe.recipe_name_custom|title }}{{ block.super }}{% endblock %}
+
 {% block script %}
 <script>
     var scrollSpy = new bootstrap.ScrollSpy(document.body, {
