@@ -86,7 +86,7 @@ class RecipeFilter(django_filters.FilterSet):
         method=name_custom_filter,
         label='Recipe Name', 
         widget=forms.TextInput(attrs={'class':'form-control'}))
-    recipe_rating_exists = django_filters.BooleanFilter(label='No Rating', field_name='recipe_rating', lookup_expr='isnull')
+    recipe_rating_not_exist = django_filters.BooleanFilter(label='No Rating', field_name='recipe_rating', lookup_expr='isnull')
     recipe_rating = django_filters.LookupChoiceFilter(
         label='Rating',
         field_class=forms.DecimalField,
@@ -196,7 +196,7 @@ class RecipeFilter(django_filters.FilterSet):
         model = Recipe
         fields = [
             'recipe_name_custom', 
-            'recipe_rating_exists',
+            'recipe_rating_not_exist',
             'recipe_rating',
             'recipe_publisher', 
             'recipe_type',
@@ -222,7 +222,7 @@ class RecipeFilter(django_filters.FilterSet):
             self.form.fields[field].widget.attrs.update({
                 'class': 'form-control'
             })
-        self.form.fields['recipe_rating_exists'].widget.attrs = {'class': 'form-select'}
+        self.form.fields['recipe_rating_not_exist'].widget.attrs = {'class': 'form-select'}
         self.form.fields['recipe_calories'].widget.attrs = {'class': 'form-select'}
         self.form.fields['recipe_difficulty'].widget.attrs = {'class': 'form-select'}
         self.form.fields['recipe_priority'].widget.attrs = {'class': 'form-select'}
